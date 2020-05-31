@@ -7,7 +7,7 @@
     <div class="row">
       <div class="col-lg-12">
         <div class="title text-center">
-          <h2>Searched Resutl</h2>
+          <h2>Searched Result</h2>
         </div>
       </div>
       @foreach ($users as $users)
@@ -20,11 +20,8 @@
             <span>Age: {{ $users->age }}</span>
             <span>Height: {{ $users->height }}</span>
             <span>Occupation: {{ $users->occupation }}</span>
-            @if(Auth::user() && $users->alldocument == '1')
+            @if(Auth::check())
                 <a href="{{ url('detailsProfile/'.$users->id) }}" class="btn btn-primary">View Profile</a>
-            @else
-            <!-- Button trigger modal -->
-            <a class="btn btn-primary" data-toggle="modal" data-target="#viewProfile">View Profile</a>
             @endif
           </div>
         </div>
@@ -35,26 +32,6 @@
   </div>
 </section>
 
-<!--View Profile Modal -->
-<div class="login-modal">
-<div class="modal fade" id="viewProfile" tabindex="-1" role="dialog" aria-labelledby="viewProfileLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-    <div class="modal-content">
-        <div class="modal-header">
-        <h5 class="modal-title" id="viewProfileLabel"><img src="{{ asset('public/Frontend/images/zibonshathi.png') }}" alt="logo" style="width: 130px; height: 65px;"></h5>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-        </div>
-        <div class="modal-body">
-            First Log in/Register <span class="text-danger">Or</span> Complete your profile
-        </div>
-    </div>
-    </div>
-</div>
-</div>
-<!-- Featured Profile Part End -->
 
 
 

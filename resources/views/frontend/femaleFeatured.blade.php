@@ -22,9 +22,6 @@
 
                         @if(Auth::check())
                         <a href="{{ url('detailsProfile/'.$femaleFeatured->id) }}" class="btn btn-primary">View Profile</a>
-                        @else
-                        <!-- Button trigger modal -->
-                        <a class="btn btn-primary" data-toggle="modal" data-target="#login">View Profile</a>
                         @endif
 
                     </div>

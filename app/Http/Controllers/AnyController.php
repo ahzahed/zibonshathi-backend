@@ -19,11 +19,11 @@ class AnyController extends Controller
         $maleFeatured = User::where('gender', '=', 'Male')->where('user_type', '=', '0')->limit(4)->get();
         $femaleFeatured = User::where('gender', '=', 'Female')->where('user_type', '=', '0')->limit(4)->get();
         $service = Service::limit(4)->get();
-        $testimonial = User::where('testimonial', '!=', ' ')->limit(2)->get();
+        $testimonial = User::where('testimonial', '!=', NULL)->limit(2)->get();
         $blog = Blog::all();
 
     return view('home', compact('maleFeatured','service','blog','femaleFeatured','testimonial'));
     }
-    
+
 
 }

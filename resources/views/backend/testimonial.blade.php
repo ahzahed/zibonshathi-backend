@@ -30,9 +30,8 @@
                     <tr>
                       <th>ID No</th>
                       <th>Name</th>
-                      <th>Email</th>
+                      <th>Details</th>
                       <th>Action</th>
-                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -41,8 +40,7 @@
                       <td>{{$testimonial->id}}</td>
                       <td>{{$testimonial->name}}</td>
                       <td>{{$testimonial->testimonial}}</td>
-                      <td><a href="">View</a></td>
-                      <td>@if($testimonial->testimonial != " ")
+                      <td>@if($testimonial->testimonial != NULL)
                         <a href="{{ url('testimonialDelete/'.$testimonial->id) }}" class="btn btn-danger">Delete</a>
                          @endif
                         </td>

@@ -10,13 +10,13 @@ class TestimonialController extends Controller
 {
     public function testimonial(){
         if (Auth::user()->user_type == 1) {
-            $testimonial = User::where('testimonial', '!=', ' ')->get();
+            $testimonial = User::where('testimonial', '!=', NULL)->get();
             return view('backend.testimonial',compact('testimonial'));
         }
         return Redirect()->route('home');
     }
     public function testimonialDelete($id){
-        $changeValue = User::where('id',$id)->update(['testimonial'=>" "]);
+        $changeValue = User::where('id',$id)->update(['testimonial'=>NULL]);
         return back();
     }
 }

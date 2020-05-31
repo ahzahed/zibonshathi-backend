@@ -249,7 +249,7 @@ class RegisteredUserController extends Controller
         $token = $_POST['stripeToken'];
 
         $charge = \Stripe\Charge::create([
-            'amount' => $totalCharge * 100,
+            'amount' => $totalCharge,
             'currency' => 'usd',
             'description' => 'Zibonshathi Payment',
             'source' => $token,
