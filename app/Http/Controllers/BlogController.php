@@ -19,7 +19,7 @@ class BlogController extends Controller
     }
     public function index()
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $blog = Blog::all();
             return view('backend.blog.blog',compact('blog'));
         }
@@ -33,7 +33,7 @@ class BlogController extends Controller
      */
     public function create()
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             return view('backend.blog.blogAdd');
         }
         return Redirect()->route('home');
@@ -47,7 +47,7 @@ class BlogController extends Controller
      */
     public function store(Request $request)
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $validatedData = $request->validate([
                 'image' => ['required', 'image', 'mimes:png,jpg,jpeg,bmp,svg','max:5000'],
                 'title' => ['required'],
@@ -80,7 +80,7 @@ class BlogController extends Controller
      */
     public function show($id)
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $blog=Blog::findorfail($id);
             return view('backend.blog.blogShow',compact('blog'));
         }
@@ -95,7 +95,7 @@ class BlogController extends Controller
      */
     public function edit($id)
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $blog = Blog::findorfail($id);
             return view('backend.blog.blogEdit',compact('blog'));
         }
@@ -111,7 +111,7 @@ class BlogController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             if(request()->has('image')){
                 $blog = Blog::findorfail($id);
                 $imageUpload = request()->file('image');
@@ -147,7 +147,7 @@ class BlogController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $blog=Blog::find($id);
             $image = $blog->image;
             unlink($image);
@@ -158,28 +158,25 @@ class BlogController extends Controller
     }
 
     public function addBlog(){
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             return view('backend.blog/blogAdd');
         }
         return Redirect()->route('home');
     }
     public function allBlog(){
-        if (Auth::user()->user_type == 1) {
             $blog=Blog::all();
             return view('frontend.pages.blog',compact('blog'));
-        }
-        return Redirect()->route('home');
     }
 
     function active($id){
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $changeValue = Blog::where('id',$id)->update(['status'=>1]);
             return back();
         }
         return Redirect()->route('home');
     }
     function deactive($id){
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $changeValue = Blog::where('id',$id)->update(['status'=>0]);
             return back();
         }

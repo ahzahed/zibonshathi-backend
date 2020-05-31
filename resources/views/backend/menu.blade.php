@@ -37,12 +37,14 @@
     </li>
 
     <!-- Nav Item - Pages Collapse Menu -->
+    @if (Auth::user()->user_type == '1')
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/userrole')}}">
             <i class="fas fa-fw fa-cog"></i>
             <span>User Role</span>
         </a>
     </li>
+    @endif
 
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">

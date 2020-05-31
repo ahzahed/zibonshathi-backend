@@ -45,14 +45,20 @@
                     </div>
                 </li>
                 @endguest
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/allBlog') }}">Blog</a>
-                </li>
-                <li class="nav-item">
+                {{--  <li class="nav-item">
                     <a class="nav-link" href="{{ url('/contact') }}" data-toggle="modal" data-target="#contact">
                         <i class="fas fa-headset help"></i> Help <i class="fas fa-chevron-down"></i>
                     </a>
-                </li>
+                </li>  --}}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-headset help"></i> Help <i class="fas fa-chevron-down"></i>
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ url('/helpdesk') }}">Help Desk</a>
+                      <a class="dropdown-item" data-toggle="modal" data-target="#contact">Send Message</a>
+                    </div>
+                  </li>
 
             </ul>
         </div>

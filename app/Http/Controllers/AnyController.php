@@ -25,5 +25,19 @@ class AnyController extends Controller
     return view('home', compact('maleFeatured','service','blog','femaleFeatured','testimonial'));
     }
 
-
+    function aboutus(){
+        return view('frontend.pages.aboutus');
+    }
+    function privacy_policy(){
+        return view('frontend.pages.privacy_policy');
+    }
+    function termsof_us(){
+        return view('frontend.pages.termsof_us');
+    }
+    function partner_search_policy(){
+        return view('frontend.pages.partner_search_policy');
+    }
+    function helpdesk(){
+        return view('frontend.pages.helpdesk');
+    }
 }

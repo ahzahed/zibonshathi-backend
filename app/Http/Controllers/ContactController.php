@@ -100,7 +100,7 @@ class ContactController extends Controller
      */
     public function destroy($id)
     {
-        if (Auth::user()->user_type == 1) {
+        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
             $contact=Contact::find($id);
             $contact->delete();
             session()->flash('danger','Successsfully message deleted');

@@ -10,7 +10,7 @@ Auth::routes(['verify'=>true]);
 
 //For Home
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
-Route::get('/admin', 'HomeController@index')->name('admin');
+// Route::get('/admin', 'HomeController@index')->name('admin');
 
 Route::post('find-person','HomeController@search')->name('find-person');
 
@@ -110,6 +110,18 @@ Route::get('/userroleDelete/{id}', 'AddUserByAdminController@userroleDelete');
 //User Role
 Route::get('/userrole', 'AddUserByAdminController@userrole')->name('userrole');
 
+//About Us
+Route::get('/aboutus', 'AnyController@aboutus')->name('aboutus');
 
+//Privacy Policy
+Route::get('/privacy_policy', 'AnyController@privacy_policy')->name('privacy_policy');
+
+//Terms Of Us
+Route::get('/termsof_us', 'AnyController@termsof_us')->name('termsof_us');
+
+//Partner Search Policy
+Route::get('/partner_search_policy', 'AnyController@partner_search_policy')->name('partner_search_policy');
+
+Route::get('/helpdesk', 'AnyController@helpdesk')->name('helpdesk');
 
 
