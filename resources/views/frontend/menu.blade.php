@@ -13,8 +13,7 @@
 
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
-                        data-target="#login">{{ __('Login') }} <i class="fas fa-chevron-down"></i><span
+                    <a class="nav-link" href="{{ route('login') }}" data-toggle="modal" data-target="#login">{{ __('Login') }} <i class="fas fa-chevron-down"></i><span
                             class="sr-only">(current)</span></a>
                 </li>
                 @if (Route::has('register'))
