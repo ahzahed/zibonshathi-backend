@@ -15,7 +15,7 @@ class VisitorController extends Controller
     }
     function visitorIndex()
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             // $visitorData = VisitorModel::orderBy('id','desc')->take(3)->get();
             $visitorData = VisitorModel::orderBy('id','desc')->get();
             return view('backend/visitor', compact('visitorData'));

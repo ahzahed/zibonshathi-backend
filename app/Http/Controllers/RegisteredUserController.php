@@ -291,14 +291,14 @@ class RegisteredUserController extends Controller
     function index()
     {
         $registeredUser = User::all();
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             return view('backend.registered_user.registered_user', compact('registeredUser'));
         }
         return Redirect()->route('home');
     }
     function active($id)
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $changeValue = User::where('id', $id)->update(['status' => 1]);
             session()->flash('success', 'User successsfully activated');
             return back();
@@ -307,7 +307,7 @@ class RegisteredUserController extends Controller
     }
     function deactive($id)
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $changeValue = User::where('id', $id)->update(['status' => 0]);
             session()->flash('danger', 'User successsfully deactivated');
             return back();
@@ -316,7 +316,7 @@ class RegisteredUserController extends Controller
     }
     public function pendingUser()
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $pendingUser = User::all();
             return view('backend.registered_user.pending_user', compact('pendingUser'));
         }
@@ -324,7 +324,7 @@ class RegisteredUserController extends Controller
     }
     function approveUser($id)
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $changeValue = User::where('id', $id)->update(['pending' => 1]);
             session()->flash('success', 'User successsfully approved');
             return back();
@@ -334,7 +334,7 @@ class RegisteredUserController extends Controller
 
     public function registeredUserView($id)
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $registeredUser = User::where('id', $id)->first();
             return view('backend.registered_user.view_user', compact('registeredUser'));
         }
@@ -343,7 +343,7 @@ class RegisteredUserController extends Controller
 
     public function pendingUserView($id)
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $registeredUser = User::where('id', $id)->first();
             return view('backend.registered_user.view_user', compact('registeredUser'));
         }
@@ -352,7 +352,7 @@ class RegisteredUserController extends Controller
 
     public function registeredUserDelete($id)
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $user = User::find($id);
             $avatar = $user->avatar;
             if ($avatar) {
@@ -366,7 +366,7 @@ class RegisteredUserController extends Controller
     }
     public function pendingUserDelete($id)
     {
-        if (Auth::user()->user_type == 1 && Auth::user()->user_type == 2) {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $user = User::find($id);
             $user->delete();
             session()->flash('danger', 'User successsfully deleted');
