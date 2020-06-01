@@ -244,7 +244,9 @@
                             @csrf
                         </form>
                         <a class="dropdown-item" href="{{ route('password.request') }}" role="button">Change Password</a>
-                        <a class="dropdown-item" href="{{url('/adduser_byadmin')}}" role="button">Add User</a>
+                        @if(Auth::user()->user_type == 1)
+                            <a class="dropdown-item" href="{{url('/adduser_byadmin')}}" role="button">Add User</a>
+                        @endif
                     </div>
                 </li>
 

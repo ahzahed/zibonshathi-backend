@@ -14,7 +14,9 @@ class AddUserByAdminController extends Controller
         $this->middleware('auth');
     }
     public function adduser_byadmin(){
-        return view('backend.adduser_byadmin');
+        if (Auth::user()->user_type == 1) {
+            return view('backend.adduser_byadmin');
+        }
     }
     public function adduser_byadmin_store(Request $request){
         if (Auth::user()->user_type == 1) {
