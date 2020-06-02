@@ -42,7 +42,17 @@ class HomeController extends Controller
         $blog = Blog::all();
 
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
-            return view('admin');
+            $male = User::where('gender', '=', 'Male')->get();
+            $female = User::where('gender', '=', 'Female')->get();
+            $active = User::where('status', '=', 1)->get();
+            $pending = User::where('status', '=', 0)->where('user_type', '=', 0)->get();
+
+            $male=$male->count();
+            $female=$female->count();
+            $active=$active->count();
+            $pending=$pending->count();
+
+            return view('admin',compact('male','female','active','pending'));
         } else {
             return view('home', compact('maleFeatured', 'service', 'blog', 'femaleFeatured', 'testimonial'));
         }

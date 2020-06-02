@@ -52,9 +52,9 @@ class RegisteredUserController extends Controller
         $avatarUpload = request()->file('avatar');
         if ($avatarUpload) {
             $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
-            $avatarPath = public_path('/Frontend/images/users');
+            $avatarPath = public_path('/frontend/images/users');
             $avatarUpload->move($avatarPath, $avatarName);
-            $data['avatar'] = 'public/Frontend/images/users/' . $avatarName;
+            $data['avatar'] = 'public/frontend/images/users/' . $avatarName;
             $user = User::find($id);
             $avatar = $user->avatar;
             if ($avatar) {

@@ -65,10 +65,27 @@ Route::get('/testimonialDelete/{id}', 'TestimonialController@testimonialDelete')
 Route::get('/userPayment', 'PaymentController@userPayment');
 Route::get('/paymentDelete/{id}', 'PaymentController@paymentDelete');
 
+//About Us
+Route::get('/aboutus', 'AnyController@aboutus')->name('aboutus');
+
+//Privacy Policy
+Route::get('/privacy_policy', 'AnyController@privacy_policy')->name('privacy_policy');
+
+//Terms Of Us
+Route::get('/termsof_us', 'AnyController@termsof_us')->name('termsof_us');
+
+//Partner Search Policy
+Route::get('/partner_search_policy', 'AnyController@partner_search_policy')->name('partner_search_policy');
+
+Route::get('/helpdesk', 'AnyController@helpdesk')->name('helpdesk');
+
 
 
 //For Admin
 Route::get('/visitor', 'VisitorController@visitorIndex');
+
+//User Role
+Route::get('/dashboard', 'dashboardController@dashboard')->name('dashboard');
 
 // New Register maintain, For admin panel
 Route::get('/registeredUser', 'RegisteredUserController@index');
@@ -110,18 +127,6 @@ Route::get('/userroleDelete/{id}', 'AddUserByAdminController@userroleDelete');
 //User Role
 Route::get('/userrole', 'AddUserByAdminController@userrole')->name('userrole');
 
-//About Us
-Route::get('/aboutus', 'AnyController@aboutus')->name('aboutus');
 
-//Privacy Policy
-Route::get('/privacy_policy', 'AnyController@privacy_policy')->name('privacy_policy');
-
-//Terms Of Us
-Route::get('/termsof_us', 'AnyController@termsof_us')->name('termsof_us');
-
-//Partner Search Policy
-Route::get('/partner_search_policy', 'AnyController@partner_search_policy')->name('partner_search_policy');
-
-Route::get('/helpdesk', 'AnyController@helpdesk')->name('helpdesk');
 
 

@@ -1,5 +1,5 @@
-
 @extends('backend.app')
+
 @section('content')
 <!-- Begin Page Content -->
 <div class="container-fluid">
