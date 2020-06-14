@@ -47,7 +47,7 @@
                       <td>{{$payment->name}}</td>
                       <td>{{$payment->email}}</td>
                       <td>{{$payment->payment_id}}</td>
-                      <td>{{$payment->paying_amount}}</td>
+                      <td>{{($payment->paying_amount)/100}}</td>
                       <td>{{$payment->blnc_transection}}</td>
                       <td>{{$payment->payment_date}}</td>
                       <td>{{$payment->payment_exp}}</td>

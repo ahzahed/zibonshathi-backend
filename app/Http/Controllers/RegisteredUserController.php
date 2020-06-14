@@ -207,22 +207,26 @@ class RegisteredUserController extends Controller
     public function stripeCharge(Request $request)
     {
         $totalCharge = $request->totalCharge;
-        // Set your secret key. Remember to switch to your live secret key in production!
-        // See your keys here: https://dashboard.stripe.com/account/apikeys
-        \Stripe\Stripe::setApiKey('sk_test_3YMEwbMESG4wUJMyuWj8rxVF00LgfPi9hS');
+        if ($totalCharge == 99 || $totalCharge == 999){
+            // Set your secret key. Remember to switch to your live secret key in production!
+            // See your keys here: https://dashboard.stripe.com/account/apikeys
+            \Stripe\Stripe::setApiKey('sk_live_2TTEFRTfzDLiCPOxRLEhzYCY00NstkTAMZ');
 
-        // Token is created using Checkout or Elements!
-        // Get the payment token ID submitted by the form:
-        $token = $_POST['stripeToken'];
+            // Token is created using Checkout or Elements!
+            // Get the payment token ID submitted by the form:
+            $token = $_POST['stripeToken'];
 
-        $charge = \Stripe\Charge::create([
-            'amount' => $totalCharge,
-            'currency' => 'usd',
-            'description' => 'Zibonshathi Payment',
-            'source' => $token,
-            'metadata' => ['order_id' => '6735'],
-        ]);
-
+            $charge = \Stripe\Charge::create([
+                'amount' => $totalCharge*100,
+                'currency' => 'usd',
+                'description' => 'Zibonshathi Payment',
+                'source' => $token,
+                'metadata' => ['order_id' => '6735'],
+            ]);
+        }else{
+            session()->flash('danger', 'Select any package');
+            return Redirect()->route('viewProfile');
+        }
         if ($totalCharge == 99) {
 
             $id = Auth::user()->id;
@@ -235,10 +239,9 @@ class RegisteredUserController extends Controller
             $date = Carbon::now();
             $data['payment_exp'] = $date->addWeek();
             $update = User::where('id', '=', $id)->update($data);
-            $user = User::where('id', Auth::id())->first();
             session()->flash('success', 'Your weekly payment successfully accepted');
-            return view('frontend.pages.logged_user_profile', compact('user'));
-        } else {
+            return Redirect()->route('viewProfile');
+        } else if ($totalCharge == 999){
             $id = Auth::user()->id;
 
             $data = array();
@@ -249,9 +252,11 @@ class RegisteredUserController extends Controller
             $date = Carbon::now();
             $data['payment_exp'] = $date->addMonth();
             $update = User::where('id', '=', $id)->update($data);
-            $user = User::where('id', Auth::id())->first();
             session()->flash('success', 'Your monthly payment successfully accepted');
-            return view('frontend.pages.logged_user_profile', compact('user'));
+            return Redirect()->route('viewProfile');
+        }else{
+            session()->flash('danger', 'Select any package');
+            return Redirect()->route('viewProfile');
         }
     }
 
