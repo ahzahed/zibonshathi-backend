@@ -3,7 +3,7 @@
   <div class="container str-content">
     <div class="row">
       <div class="col-lg-12">
-        <div class="title text-center">
+        <div class="title text-center title2">
           <h2 class="title-head">Thousand Of Success Stories</h2>
         </div>
       </div>
@@ -25,17 +25,16 @@
   </div>
 </section>
 <!-- Stories Part End -->
-
 <!-- Common part Start -->
 <section id="common">
   <div class="container">
     <div class="row">
       <div class="col-lg-10 mx-auto">
         <div class="row">
-          <div class="col-lg-8">
+          <div class="col-lg-8 col-md-8">
             <h3 class="text-center">Post Your Success Story!</h3>
           </div>
-          <div class="col-lg-4">
+          <div class="col-lg-4 col-md-4">
             <div class="cmn-btn">
               <a class="btn btn-primary" href="{{ route('register') }}" role="button">Register Free Now</a>
             </div>
@@ -46,3 +45,8 @@
   </div>
 </section>
 <!-- Common part End -->
+
+
+
+
+

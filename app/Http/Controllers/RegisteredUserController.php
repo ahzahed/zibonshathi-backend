@@ -16,11 +16,6 @@ class RegisteredUserController extends Controller
     }
 
     //Edit Profile step by step
-    public function editHeader()
-    {
-        $user = User::where('id', Auth::id())->first();
-        return view('frontend.user_profile_edit.edit_header', compact('user'));
-    }
 
     public function update_user_header(Request $request, $id)
     {
@@ -71,11 +66,6 @@ class RegisteredUserController extends Controller
     }
 
     //Edit Profile step by step
-    public function editDetails()
-    {
-        $user = User::where('id', Auth::id())->first();
-        return view('frontend.user_profile_edit.edit_details', compact('user'));
-    }
 
     public function update_user_delails(Request $request, $id)
     {
@@ -86,12 +76,6 @@ class RegisteredUserController extends Controller
         $update = User::where('id', '=', $id)->update($data);
         session()->flash('success', 'Your profile successfully updated');
         return Redirect()->route('viewProfile');
-    }
-
-    public function editBasics()
-    {
-        $user = User::where('id', Auth::id())->first();
-        return view('frontend.user_profile_edit.basics_life', compact('user'));
     }
 
     public function update_user_basics(Request $request, $id)
@@ -121,12 +105,6 @@ class RegisteredUserController extends Controller
         return Redirect()->route('viewProfile');
     }
 
-    public function editEducation()
-    {
-        $user = User::where('id', Auth::id())->first();
-        return view('frontend.user_profile_edit.education', compact('user'));
-    }
-
     public function update_user_education(Request $request, $id)
     {
         $data = $request->validate([
@@ -148,11 +126,7 @@ class RegisteredUserController extends Controller
         return Redirect()->route('viewProfile');
     }
 
-    public function editFamily()
-    {
-        $user = User::where('id', Auth::id())->first();
-        return view('frontend.user_profile_edit.family_details', compact('user'));
-    }
+
 
     public function update_user_family(Request $request, $id)
     {
@@ -171,12 +145,6 @@ class RegisteredUserController extends Controller
         $update = User::where('id', '=', $id)->update($data);
         session()->flash('success', 'Your profile successfully updated');
         return Redirect()->route('viewProfile');
-    }
-
-    public function editUserContact()
-    {
-        $user = User::where('id', Auth::id())->first();
-        return view('frontend.user_profile_edit.contact_info', compact('user'));
     }
 
     public function update_user_contact(Request $request, $id)

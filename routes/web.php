@@ -26,22 +26,16 @@ Route::get('/viewProfile', 'RegisteredUserController@viewProfile')->name('viewPr
 
 
 //Edit profile step by step
-Route::get('/editHeader', 'RegisteredUserController@editHeader')->name('editHeader');
 Route::post('/update_user_header/{id}', 'RegisteredUserController@update_user_header');
 
-Route::get('/editDetails', 'RegisteredUserController@editDetails')->name('editDetails');
 Route::post('/update_user_delails/{id}', 'RegisteredUserController@update_user_delails');
 
-Route::get('/editBasics', 'RegisteredUserController@editBasics')->name('editBasics');
 Route::post('/update_user_basics/{id}', 'RegisteredUserController@update_user_basics');
 
-Route::get('/editEducation', 'RegisteredUserController@editEducation')->name('editEducation');
 Route::post('/update_user_education/{id}', 'RegisteredUserController@update_user_education');
 
-Route::get('/editFamily', 'RegisteredUserController@editFamily')->name('editFamily');
 Route::post('/update_user_family/{id}', 'RegisteredUserController@update_user_family');
 
-Route::get('/editUserContact', 'RegisteredUserController@editUserContact')->name('editUserContact');
 Route::post('/update_user_contact/{id}', 'RegisteredUserController@update_user_contact');
 
 
@@ -73,6 +67,9 @@ Route::get('/privacy_policy', 'AnyController@privacy_policy')->name('privacy_pol
 
 //Terms Of Us
 Route::get('/termsof_us', 'AnyController@termsof_us')->name('termsof_us');
+
+//Premium Membership
+Route::get('/premium_membership', 'AnyController@premium_membership')->name('premium_membership');
 
 //Partner Search Policy
 Route::get('/partner_search_policy', 'AnyController@partner_search_policy')->name('partner_search_policy');

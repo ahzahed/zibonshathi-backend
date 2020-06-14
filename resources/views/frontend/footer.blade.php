@@ -2,21 +2,21 @@
 <section id="contact">
   <div class="container">
     <div class="row">
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-sm-6">
         <div class="cont-content text-center">
           <h5>Need Help?</h5>
           <div class="cont-span">
-            <span><a href="#">Member Login</a></span>
-            <span><a href="#">Sign Up</a></span>
+            <span><a data-toggle="modal" data-target="#login">Member Login</a></span>
+            <span><a href="{{ route('register') }}">Sign Up</a></span>
             <span><a href="{{ url('/partner_search_policy') }}">Partner Search</a></span>
             <span><a href="#">How to Use Zibonshathi.com</a></span>
-            <span><a href="#">Premium Memberships</a></span>
+            <span><a href="{{ url('/premium_membership') }}">Premium Memberships</a></span>
             <span><a href="#">Customer Support</a></span>
             <span><a href="#">Site Map</a></span>
           </div>
         </div>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-sm-6">
         <div class="cont-content text-center">
           <h5>Company</h5>
           <div class="cont-span">
@@ -28,7 +28,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-sm-6">
         <div class="cont-content text-center">
           <h5>Privacy & You</h5>
           <div class="cont-span">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </div>
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-sm-6">
         <div class="cont-content text-center">
           <h5>Follow us</h5>
           <div class="cont-spans">

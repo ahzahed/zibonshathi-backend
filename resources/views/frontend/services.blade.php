@@ -10,9 +10,9 @@
       </div>
       @foreach ($service as $services)
       @if ($services->status == 1)
-      <div class="col-lg-3">
+      <div class="col-lg-3 col-sm-6">
         <div class="service-content text-center">
-          {!! $services->icon !!}
+            {!! $services->icon !!}
           <h3>{{ $services->title }}</h3>
           <p>{{ $services->description}}</p>
         </div>
@@ -30,10 +30,10 @@
     <div class="row">
       <div class="col-lg-10 mx-auto">
         <div class="row">
-          <div class="col-lg-9">
+          <div class="col-lg-9 col-12 col-md-9">
             <h3 class="text-center">Register Free to find your Perfect Match!</h3>
           </div>
-          <div class="col-lg-3">
+          <div class="col-lg-3 col-12 col-md-3">
             <div class="cmn-btn">
               <a class="btn btn-primary" href="{{ route('register') }}" role="button">Register Now</a>
             </div>
@@ -44,3 +44,5 @@
   </div>
 </section>
 <!-- Common part End -->
+
+

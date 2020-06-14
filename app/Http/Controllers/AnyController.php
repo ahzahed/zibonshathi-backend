@@ -34,6 +34,9 @@ class AnyController extends Controller
     function termsof_us(){
         return view('frontend.pages.termsof_us');
     }
+    function premium_membership(){
+        return view('frontend.pages.premium_membership');
+    }
     function partner_search_policy(){
         return view('frontend.pages.partner_search_policy');
     }

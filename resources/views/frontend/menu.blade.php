@@ -1,19 +1,23 @@
 <!-- Navbar Part Star -->
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar nav-bg navbar-expand-lg navbar-light">
     <div class="container">
-        <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('public/frontend/images/zibonshathi.png') }}" alt="logo"
-                style="width: 140px; height: 75px;"></a>
+        <a class="navbar-brand" href="{{ url('/') }}"><img src="{{ asset('public/frontend/images/zibonshathi.png') }}"
+                alt="logo" style="width: 140px; height: 75px;"></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+            <i class="fas fa-bars"></i>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ url('/') }}">Home</a>
+                </li>
 
                 @guest
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}" data-toggle="modal" data-target="#login">{{ __('Login') }} <i class="fas fa-chevron-down"></i><span
+                    <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"
+                        data-target="#login">{{ __('Login') }} <i class="fas fa-chevron-down"></i><span
                             class="sr-only">(current)</span></a>
                 </li>
                 @if (Route::has('register'))
@@ -30,7 +34,7 @@
 
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
+                            document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
                         @if (Auth::user()->user_type=="0")
@@ -44,21 +48,16 @@
                     </div>
                 </li>
                 @endguest
-                {{--  <li class="nav-item">
-                    <a class="nav-link" href="{{ url('/contact') }}" data-toggle="modal" data-target="#contact">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <i class="fas fa-headset help"></i> Help <i class="fas fa-chevron-down"></i>
                     </a>
-                </li>  --}}
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-headset help"></i> Help <i class="fas fa-chevron-down"></i>
-                    </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="{{ url('/helpdesk') }}">Help Desk</a>
-                      <a class="dropdown-item" data-toggle="modal" data-target="#contact">Send Message</a>
+                        <a class="dropdown-item" href="{{ url('/helpdesk') }}">Help Desk</a>
+                        <a class="dropdown-item" data-toggle="modal" data-target="#contact">Send Message</a>
                     </div>
-                  </li>
-
+                </li>
             </ul>
         </div>
     </div>
