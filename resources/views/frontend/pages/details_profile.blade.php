@@ -11,9 +11,6 @@
                         <div class="col-lg-2 col-8 mx-auto col-sm-4 col-md-3">
                             <div class="pro-img">
                                 <img src="{{ asset($user->avatar) }}" alt="img" style="height: 120px;" class="w-100">
-                                <div class="overlay">
-                                    <h5><a href="#">Edit</a></h5>
-                                </div>
                             </div>
                         </div>
                         <div class="col-lg-8 col-sm-8 col-md-7">

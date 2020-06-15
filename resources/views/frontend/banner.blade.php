@@ -19,7 +19,7 @@
                                 </select>
                             </div>
                             <div class="col-lg-2 col-md-6">
-                                <label for="inputState2">Age</label>
+                                <label for="inputState2">Age From</label>
                                 <select id="inputState2" name="ageFrom" class="form-control">
                                     <option></option>
                                     <option value="18">18</option>
@@ -68,7 +68,6 @@
                                 </select>
                             </div>
                             <div class="col-lg-2 col-md-6">
-                                <label for="inputState3">To</label>
                                 <label for="inputState3">To</label>
                                 <select id="inputState3" name="ageTo" class="form-control">
                                     <option></option>

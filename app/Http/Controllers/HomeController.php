@@ -47,32 +47,75 @@ class HomeController extends Controller
             $active = User::where('status', '=', 1)->get();
             $pending = User::where('status', '=', 0)->where('user_type', '=', 0)->get();
 
-            $male=$male->count();
-            $female=$female->count();
-            $active=$active->count();
-            $pending=$pending->count();
+            $male = $male->count();
+            $female = $female->count();
+            $active = $active->count();
+            $pending = $pending->count();
 
-            return view('admin',compact('male','female','active','pending'));
+            return view('admin', compact('male', 'female', 'active', 'pending'));
         } else {
             return view('home', compact('maleFeatured', 'service', 'blog', 'femaleFeatured', 'testimonial'));
         }
     }
 
+    //Multi Search
     public function search(Request $request)
     {
+        $gender = $request->gender;
         $ageFrom = $request->ageFrom;
         $ageTo = $request->ageTo;
-        $gender = $request->gender;
         $religion = $request->religion;
         $country = $request->country;
 
-        $users = User::whereBetween('age', array($ageFrom, $ageTo))
+        if (($gender == "Male" && $ageFrom && $ageTo && $religion && $country) || ($gender == "Female" && $ageFrom && $ageTo && $religion && $country)) {
+            $users = User::whereBetween('age', array($ageFrom, $ageTo))
+            ->where('gender', '=', $gender)
+            ->where('religion', '=', $religion)
+            ->where('country', '=', $country)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if(($gender == "Male" && $ageFrom && $ageTo && $religion) || ($gender == "Female" && $ageFrom && $ageTo && $religion)){
+            $users = User::whereBetween('age', array($ageFrom, $ageTo))
+            ->where('gender', '=', $gender)
+            ->where('religion', '=', $religion)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if(($gender == "Male" && $ageFrom && $ageTo) || ($gender == "Female" && $ageFrom && $ageTo)){
+            $users = User::whereBetween('age', array($ageFrom, $ageTo))
+            ->where('gender', '=', $gender)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if(($gender == "Male" && $religion && $country) || ($gender == "Female" && $religion && $country)){
+            $users = User::where('country', '=', $country)
             ->orWhere('gender', '=', $gender)
             ->orWhere('religion', '=', $religion)
-            ->orWhere('country', '=', $country)
             ->get();
-        return view('frontend.pages.searched_user', compact('users'));
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if(($religion) || ($religion)){
+            $users = User::where('religion', '=', $religion)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if(($country) || ($country)){
+            $users = User::where('country', '=', $country)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if(($gender == "Male") || ($gender == "Female")){
+            $users = User::where('gender', '=', $gender)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+
+        // $users = User::whereBetween('age', array($ageFrom, $ageTo))
+        //     ->orWhere('gender', '=', $gender)
+        //     ->orWhere('religion', '=', $religion)
+        //     ->orWhere('country', '=', $country)
+        //     ->get();
+        // return view('frontend.pages.searched_user', compact('users'));
     }
-
-
 }
