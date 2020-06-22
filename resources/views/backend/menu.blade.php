@@ -62,20 +62,6 @@
     </li>
 
     <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('/service')}}">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Service</span>
-        </a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link collapsed" href="{{url('/blog')}}">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Blog</span>
-        </a>
-    </li>
-
-    <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/contact')}}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Message</span>
@@ -93,6 +79,19 @@
         <a class="nav-link collapsed" href="{{url('/testimonial')}}">
             <i class="fas fa-fw fa-cog"></i>
             <span>Testimonial</span>
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('/service')}}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Service</span>
+        </a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('/blog')}}">
+            <i class="fas fa-fw fa-cog"></i>
+            <span>Blog</span>
         </a>
     </li>
 

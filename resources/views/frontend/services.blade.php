@@ -25,7 +25,7 @@
 <!-- Service Part End -->
 
 <!-- Common part Start -->
-<section id="common">
+<section id="common" @if (Auth::user()) class="d-none" @endif>
   <div class="container">
     <div class="row">
       <div class="col-lg-10 mx-auto">

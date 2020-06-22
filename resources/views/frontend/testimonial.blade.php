@@ -36,7 +36,38 @@
           </div>
           <div class="col-lg-4 col-md-4">
             <div class="cmn-btn">
+                @if (Auth::user())
+                <a class="btn btn-primary" role="button" data-toggle="modal"
+                data-target="#feedback">Feedback</a>
+                <!-- Modal for feedback -->
+                <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="feedLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="feedLabel">Write a feedback</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <form method="POST" action="{{ url('testimonial/'.Auth::user()->id) }}">
+                                    @csrf
+                                    <div class="form-group">
+                                        <label>Give a feedback</label>
+                                        <input type="text" class="form-control" name="testimonial" placeholder="Write a happy story">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                @else
               <a class="btn btn-primary" href="{{ route('register') }}" role="button">Register Free Now</a>
+              @endif
             </div>
           </div>
         </div>
@@ -45,6 +76,8 @@
   </div>
 </section>
 <!-- Common part End -->
+
+
 
 
 

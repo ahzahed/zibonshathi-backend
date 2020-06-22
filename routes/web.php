@@ -27,19 +27,18 @@ Route::get('/viewProfile', 'RegisteredUserController@viewProfile')->name('viewPr
 
 //Edit profile step by step
 Route::post('/update_user_header/{id}', 'RegisteredUserController@update_user_header');
-
 Route::post('/update_user_delails/{id}', 'RegisteredUserController@update_user_delails');
-
 Route::post('/update_user_basics/{id}', 'RegisteredUserController@update_user_basics');
-
 Route::post('/update_user_education/{id}', 'RegisteredUserController@update_user_education');
-
 Route::post('/update_user_family/{id}', 'RegisteredUserController@update_user_family');
-
 Route::post('/update_user_contact/{id}', 'RegisteredUserController@update_user_contact');
 
 
 Route::post('/testimonial/{id}', 'RegisteredUserController@testimonial');
+
+//Rgister as parent or guardian
+Route::get('/register_as_p_g', 'AnyController@register_as_p_g')->name('register_as_p_g');
+Route::post('/register_as_p_g_store', 'AnyController@register_as_p_g_store')->name('register_as_p_g_store');
 
 //All Profile
 Route::get('/allMaleProfile', 'RegisteredUserController@allMaleProfile')->name('allMaleProfile');
@@ -50,6 +49,7 @@ Route::get('/detailsProfile/{id}', 'RegisteredUserController@detailsProfile')->n
 
 /*  Contact */
 Route::resource('contact', 'ContactController');
+Route::post('/replypeople/{id}', 'ContactController@replypeople');
 
 //Testimonial
 Route::get('/testimonial', 'TestimonialController@testimonial');

@@ -18,6 +18,7 @@
     </div>
     @endif
 </div>
+@if (Auth::user()->user_type=="0")
 <!-- View Profile Part Start -->
 <section id="v-profile">
     <div class="container">
@@ -215,6 +216,57 @@
     </div>
 </section>
 <!-- View Profile Part End -->
+@endif
+
+
+@if (Auth::user()->user_type=="5")
+<!-- View Profile Part Start -->
+<section id="v-profile">
+    <div class="container">
+        <div class="row">
+            {{--  Update header part  --}}
+            <div class="col-lg-12">
+                <div class="v-pro-body">
+                    <div class="row">
+
+                        <div class="col-lg-4 col-sm-6 col-md-6">
+                            <div class="pro-content">
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <h6><strong>Name : </strong>{{ $user->name }}</h6>
+                                        <h6><strong>Email : </strong>{{ $user->email }}</h6>
+                                        <h6>
+                                            <span><strong>Phone Number : </strong>{{ $user->phone }}</span>
+                                        </h6>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-8 p-0 col-sm-6 col-md-6">
+                            <div class="cmn-btn">
+                                <a class="btn btn-primary" role="button" data-toggle="modal"
+                                    data-target="#feedback">Feedback</a>
+                                <a class="btn btn-primary mt-1" role="button" data-toggle="modal"
+                                    data-target="#paymentAndStatus">Payment Status</a>
+                                @if ($user->payment_exp < Carbon\Carbon::now()) <a type="button" class="btn btn-primary"
+                                    role="button" data-toggle="modal" data-target="#contactUser">Pay Now</a>
+                                    @endif
+                                    <a class="btn btn-primary mt-1" href="{{ route('password.request') }}"
+                                        role="button">Change Password</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- View Profile Part End -->
+@endif
+
+
 
 <!-- Modal for feedback -->
 <div class="modal fade" id="feedback" tabindex="-1" role="dialog" aria-labelledby="feedLabel" aria-hidden="true">
@@ -284,14 +336,14 @@
                     <div class="form-group">
                         <ul>
                             <li><input type="radio" name="payment" value="paypal"><img
-                                    src="{{ asset('public/frontend/images/PayPal.png') }}" style="width: 100px" alt="">
+                                    src="{{ asset('public/frontend/images/stripe.png') }}" style="width: 100px" alt="">
                             </li>
-                            <li><input type="radio" name="payment" value="mastercard"><img
+                            {{-- <li><input type="radio" name="payment" value="mastercard"><img
                                     src="{{ asset('public/frontend/images/mastercard.png') }}" style="width: 100px"
                                     alt=""></li>
                             <li><input type="radio" name="payment" value="visa"><img
                                     src="{{ asset('public/frontend/images/visa.png') }}" style="width: 100px" alt="">
-                            </li>
+                            </li> --}}
                         </ul>
                     </div>
                     <input type="submit">

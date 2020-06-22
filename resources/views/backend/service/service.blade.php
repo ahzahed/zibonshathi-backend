@@ -25,7 +25,7 @@
             </div>
             <div class="card-body">
               <div class="table-responsive">
-                <a href="{{ url('/serviceAdd') }}">Add Service</a>
+                <a href="{{ url('/serviceAdd') }}" class="btn btn-info mb-2">Add Service</a>
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
                     <tr>

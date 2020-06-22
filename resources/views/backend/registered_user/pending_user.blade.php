@@ -10,7 +10,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Todays Visitor
+              <h6 class="m-0 font-weight-bold text-primary">Total Pending User
                 @forelse($pendingUser as $pendingUsers)
                 <span class="badge badge-secondary">
                 {{ $loop->count }}

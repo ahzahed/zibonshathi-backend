@@ -7,6 +7,7 @@ use App\Service;
 use App\User;
 use App\VisitorModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AnyController extends Controller
 {
@@ -42,5 +43,26 @@ class AnyController extends Controller
     }
     function helpdesk(){
         return view('frontend.pages.helpdesk');
+    }
+    public function register_as_p_g(){
+        return view ('frontend.pages.register_as_p_g');
+    }
+    public function register_as_p_g_store(Request $request){
+        $post = $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+        $post = new User();
+        $post->name = $request->name;
+        $post->phone = $request->phone;
+        $post->email = $request->email;
+        $post->user_type = 5;
+
+        $post->password = Hash::make($request->password);
+
+        $post->save();
+        return Redirect()->route('home');
     }
 }

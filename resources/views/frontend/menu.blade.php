@@ -39,6 +39,8 @@
                         </a>
                         @if (Auth::user()->user_type=="0")
                         <a class="dropdown-item" href="{{ route('viewProfile') }}">View Profile</a>
+                        @elseif (Auth::user()->user_type=="5")
+                        <a class="dropdown-item" href="{{ route('viewProfile') }}">View Profile</a>
                         @elseif (Auth::user()->user_type=="1" || Auth::user()->user_type=="2")
                         <a class="dropdown-item" href="{{ route('home') }}">Admin Panel</a>
                         @endif

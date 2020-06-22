@@ -10,20 +10,9 @@
           <div class="regis-img text-center">
             <img src="{{ asset('public/frontend/images/zibonshathi.png') }}" alt="logo" style="height: 100px;">
           </div>
-          <h3>Lets set up your account, while
-            we find Matches for you!</h3>
 
-            <div class="regis-btn text-center">
-
-                <a href="{{ url('/register_as_p_g') }}" class="btn btn-primary">
-                    {{ __('Register as Parents/Guardian') }}
-                </a>
-
-        </div>
-        <p class="font-width-bold text-center">OR</p>
-                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
+                    <form method="POST" action="{{ route('register_as_p_g_store') }}" enctype="multipart/form-data">
                         @csrf
-
                         <div class="form-group">
                             <label for="name">{{ __('Name') }}</label>
 
@@ -34,7 +23,18 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                        </div>
 
+                        <div class="form-group">
+                            <label for="phone">{{ __('Phone Number') }}</label>
+
+                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+
+                                @error('phone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
 
                         <div class="form-group">

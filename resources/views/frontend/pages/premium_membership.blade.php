@@ -12,9 +12,9 @@
             <img src="{{ asset('public/frontend/images/basic.png') }}" alt="img">
           </div>
           <h3 class="text-center">Basic</h3>
-          <h4 class="text-center">BDT 2500.00</h4>
+          <h4 class="text-center">BDT 2000.00</h4>
           <div class="body text-center">
-            <span><i class="far fa-check-circle"></i>Duration 45 Days</span>
+            <span><i class="far fa-check-circle"></i>Duration 7 Days</span>
             <span><i class="far fa-check-circle"></i>See Contact Details</span>
             <span><i class="far fa-check-circle"></i>Private Chating</span>
             <span><i class="far fa-check-circle"></i>Total 50 Proposals</span>
@@ -37,7 +37,7 @@
           <h3 class="text-center">Standard</h3>
           <h4 class="text-center">BDT 3500.00</h4>
           <div class="body text-center">
-            <span><i class="far fa-check-circle"></i>Duration 90 Days</span>
+            <span><i class="far fa-check-circle"></i>Duration 30 Days</span>
             <span><i class="far fa-check-circle"></i>See Contact Details</span>
             <span><i class="far fa-check-circle"></i>Private Chating</span>
             <span><i class="far fa-check-circle"></i>Total 70 Proposals</span>
@@ -59,7 +59,7 @@
           <h3 class="text-center">Premium</h3>
           <h4 class="text-center">BDT 5500.00</h4>
           <div class="body text-center">
-            <span><i class="far fa-check-circle"></i>Duration 180 Days</span>
+            <span><i class="far fa-check-circle"></i>Duration 365 Days</span>
             <span><i class="far fa-check-circle"></i>See Contact Details</span>
             <span><i class="far fa-check-circle"></i>Private Chating</span>
             <span><i class="far fa-check-circle"></i>Total 100 Proposals</span>
