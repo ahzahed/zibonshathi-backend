@@ -295,6 +295,14 @@ class RegisteredUserController extends Controller
         }
         return Redirect()->route('home');
     }
+    public function registeredGardian()
+    {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
+            $registeredGardian = User::all();
+            return view('backend.registered_user.registered_guardian', compact('registeredGardian'));
+        }
+        return Redirect()->route('home');
+    }
     function approveUser($id)
     {
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
@@ -338,6 +346,16 @@ class RegisteredUserController extends Controller
         return Redirect()->route('home');
     }
     public function pendingUserDelete($id)
+    {
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
+            $user = User::find($id);
+            $user->delete();
+            session()->flash('danger', 'User successsfully deleted');
+            return Redirect()->back();
+        }
+        return Redirect()->route('home');
+    }
+    public function registeredGardianDelete($id)
     {
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $user = User::find($id);

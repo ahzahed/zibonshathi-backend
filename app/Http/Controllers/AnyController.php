@@ -16,7 +16,16 @@ class AnyController extends Controller
         $UserIP = $_SERVER['REMOTE_ADDR'];
         date_default_timezone_set("Asia/Dhaka");
         $timeDate = date("Y-m-d h:i:sa");
-        VisitorModel::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);
+
+        $ip_address = VisitorModel::where('ip_address', $UserIP)->first();
+
+        if(!$ip_address){
+            VisitorModel::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);
+        }
+        // else{
+        //     VisitorModel::where('ip_address',$ip_address)->update(['visit_time'=>$timeDate]);
+        // }
+
         $maleFeatured = User::where('gender', '=', 'Male')->where('user_type', '=', '0')->limit(4)->get();
         $femaleFeatured = User::where('gender', '=', 'Female')->where('user_type', '=', '0')->limit(4)->get();
         $service = Service::limit(4)->get();
@@ -44,25 +53,5 @@ class AnyController extends Controller
     function helpdesk(){
         return view('frontend.pages.helpdesk');
     }
-    public function register_as_p_g(){
-        return view ('frontend.pages.register_as_p_g');
-    }
-    public function register_as_p_g_store(Request $request){
-        $post = $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'unique:users'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
-        ]);
-        $post = new User();
-        $post->name = $request->name;
-        $post->phone = $request->phone;
-        $post->email = $request->email;
-        $post->user_type = 5;
 
-        $post->password = Hash::make($request->password);
-
-        $post->save();
-        return Redirect()->route('home');
-    }
 }

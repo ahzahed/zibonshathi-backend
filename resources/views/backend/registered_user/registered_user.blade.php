@@ -31,6 +31,7 @@
                       <th>User ID</th>
                       <th>Name</th>
                       <th>Email</th>
+                      <th>Gender</th>
                       <th colspan="2">Action</th>
                       <th>Status</th>
                     </tr>
@@ -42,8 +43,9 @@
                       <td>{{$registeredUser->id}}</td>
                       <td>{{$registeredUser->name}}</td>
                       <td>{{$registeredUser->email}}</td>
+                      <td>{{$registeredUser->gender}}</td>
                         <td><a href="{{ url('registeredUserView/'.$registeredUser->id) }}" class="btn btn-primary">Details</a></td>
-                        <td><a href="{{ url('registeredUserDelete/'.$registeredUser->id) }}" class="btn btn-danger">Delete</a></td>
+                        <td><a href="{{ url('registeredUserDelete/'.$registeredUser->id) }}" id="delete" class="btn btn-danger">Delete</a></td>
                         <td>@if($registeredUser->status==0)
                             <a href="{{ url('registeredUserActive/'.$registeredUser->id) }}" class="btn btn-info">Active</a>
                           @else <a href="{{ url('registeredUserDeactive/'.$registeredUser->id) }}" class="btn btn-danger">Deactive</a> @endif

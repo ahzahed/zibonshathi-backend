@@ -4,6 +4,7 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-12">
+            @if ($registeredUser->user_type == 0)
             <form>
                 <input type="hidden" value="{{ $registeredUser->id }}">
                 <div class="row">
@@ -188,6 +189,35 @@
                 </div>
 
             </form>
+            @endif
+
+            @if ($registeredUser->user_type == 5)
+            <form>
+                <input type="hidden" value="{{ $registeredUser->id }}">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->name }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->email }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Phone Number</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->userphone }}" readonly>
+                        </div>
+                    </div>
+                </div>
+            <form>
+            @endif
         </div>
     </div>
 </div>

@@ -33,7 +33,12 @@ class HomeController extends Controller
         $UserIP = $_SERVER['REMOTE_ADDR'];
         date_default_timezone_set("Asia/Dhaka");
         $timeDate = date("Y-m-d h:i:sa");
-        VisitorModel::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);
+        $ip_address = VisitorModel::where('ip_address', $UserIP)->first();
+
+        if(!$ip_address){
+            VisitorModel::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);
+        }
+
         // $maleFeatured = json_decode(DB::table('users')->get());
         $maleFeatured = User::where('gender', '=', 'Male')->where('user_type', '=', '0')->limit(4)->get();
         $femaleFeatured = User::where('gender', '=', 'Female')->where('user_type', '=', '0')->limit(4)->get();
@@ -90,17 +95,34 @@ class HomeController extends Controller
         }
         else if(($gender == "Male" && $religion && $country) || ($gender == "Female" && $religion && $country)){
             $users = User::where('country', '=', $country)
-            ->orWhere('gender', '=', $gender)
-            ->orWhere('religion', '=', $religion)
+            ->where('gender', '=', $gender)
+            ->where('religion', '=', $religion)
             ->get();
             return view('frontend.pages.searched_user', compact('users'));
         }
-        else if(($religion) || ($religion)){
+        else if(($gender == "Male" && $religion) || ($gender == "Female" && $religion)){
+            $users = User::where('gender', '=', $gender)
+            ->where('religion', '=', $religion)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if(($gender == "Male" && $country) || ($gender == "Female" && $country)){
+            $users = User::where('country', '=', $country)
+            ->where('gender', '=', $gender)
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if($ageFrom && $ageTo){
+            $users = User::whereBetween('age', array($ageFrom, $ageTo))
+            ->get();
+            return view('frontend.pages.searched_user', compact('users'));
+        }
+        else if($religion){
             $users = User::where('religion', '=', $religion)
             ->get();
             return view('frontend.pages.searched_user', compact('users'));
         }
-        else if(($country) || ($country)){
+        else if($country){
             $users = User::where('country', '=', $country)
             ->get();
             return view('frontend.pages.searched_user', compact('users'));

@@ -47,7 +47,18 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                        </div>
 
+                        <div class="form-group">
+                            <label for="userphone">{{ __('Phone Number') }}</label>
+
+                                <input id="userphone" type="number" class="form-control @error('userphone') is-invalid @enderror" name="userphone" value="{{ old('userphone') }}" required autocomplete="userphone">
+
+                                @error('userphone')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                         </div>
 
                         <div class="form-group">
@@ -80,6 +91,16 @@
 
                         </div>
                     </form>
+
+                    <div class="regis-btn text-center">
+
+                        <a href="{{ url('/auth/redirect/google') }}">Gmail</a>
+                    <a href="{{ url('/auth/redirect/linkedin') }}">Linkedin</a>
+                    <a href="{{ url('/auth/redirect/facebook') }}">Facebook</a>
+                    <a href="{{ url('/auth/redirect/twitter') }}">Twitter</a>
+
+                </div>
+
                     <div class="already text-center">
                         <h6>Already a Member?</h6>
                         <a class="nav-link" href="{{ route('login') }}" data-toggle="modal"

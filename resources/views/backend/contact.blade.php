@@ -48,7 +48,7 @@
                       <td><form action="{{ URL::to('contact/'.$contact->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger" id="delete" type="submit">Delete</button>
                       </form></td>
                       <td><a type="button" class="btn btn-info" data-toggle="modal" data-target="#replypeople">Reply</a></td>
                     </tr>

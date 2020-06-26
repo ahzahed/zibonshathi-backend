@@ -50,27 +50,28 @@
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registration" aria-expanded="true" aria-controls="collapseUtilities">
             <i class="fas fa-fw fa-wrench"></i>
-            <span>Registration User</span>
+            <span>User Management</span>
         </a>
         <div id="registration" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
             <div class="bg-white py-2 collapse-inner rounded">
                 <h6 class="collapse-header">Registred User</h6>
                 <a class="collapse-item" href="{{url('/registeredUser')}}">Registrered User</a>
                 <a class="collapse-item" href="{{url('/pendingUser')}}">Pending</a>
+                <a class="collapse-item" href="{{url('/registeredGardian')}}">Parents/Guardian</a>
             </div>
         </div>
     </li>
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/contact')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-envelope"></i>
             <span>Message</span>
         </a>
     </li>
     @if (Auth::user()->user_type == '1')
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/userPayment')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-money-bill-wave"></i>
             <span>Money Transection</span>
         </a>
     </li>

@@ -51,7 +51,7 @@
                       <td>{{$payment->blnc_transection}}</td>
                       <td>{{$payment->payment_date}}</td>
                       <td>{{$payment->payment_exp}}</td>
-                      <td><a class="btn btn-danger" href="{{ url('paymentDelete/'.$payment->id) }}">Delete</a></td>
+                      <td><a class="btn btn-danger" id="delete" href="{{ url('paymentDelete/'.$payment->id) }}">Delete</a></td>
                       @if ($payment->payment_exp < Carbon\Carbon::now())
                       <td class="text-danger">Expired</td>
                       @else

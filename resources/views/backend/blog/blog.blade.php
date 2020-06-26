@@ -55,7 +55,7 @@
                       <td><form action="{{ URL::to('blog/'.$blog->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-danger" type="submit" id="delete">Delete</button>
                     </form></td>
                       <td>@if($blog->status==0)
                         <a href="{{ url('blogActive/'.$blog->id) }}" class="btn btn-info">Active</a>

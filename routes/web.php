@@ -24,6 +24,20 @@ Route::get('/viewProfile', 'RegisteredUserController@viewProfile')->name('viewPr
 // Route::get('/editProfile', 'RegisteredUserController@editProfile')->name('editProfile');
 // Route::post('/updateProfile/{id}', 'RegisteredUserController@updateProfile');
 
+//Socialite
+Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
+ Route::get('/callback/{provider}', 'SocialController@callback');
+
+Route::get('/auth/redirect/{provider}', 'SocialController@fredirect');
+Route::get('/callback/{provider}', 'SocialController@fcallback');
+
+Route::get('/auth/redirect/{provider}', 'SocialController@lredirect');
+ Route::get('/callback/{provider}', 'SocialController@lcallback');
+
+
+//Multi Image
+Route::get('multiple-image', 'ImageController@index');
+ Route::post('multiple-save', 'ImageController@save');
 
 //Edit profile step by step
 Route::post('/update_user_header/{id}', 'RegisteredUserController@update_user_header');
@@ -37,8 +51,8 @@ Route::post('/update_user_contact/{id}', 'RegisteredUserController@update_user_c
 Route::post('/testimonial/{id}', 'RegisteredUserController@testimonial');
 
 //Rgister as parent or guardian
-Route::get('/register_as_p_g', 'AnyController@register_as_p_g')->name('register_as_p_g');
-Route::post('/register_as_p_g_store', 'AnyController@register_as_p_g_store')->name('register_as_p_g_store');
+Route::get('/register_as_p_g', 'Auth\RegisterController@register_as_p_g')->name('register_as_p_g');
+Route::post('/register_as_p_g_store', 'Auth\RegisterController@register_as_p_g_store')->name('register_as_p_g_store');
 
 //All Profile
 Route::get('/allMaleProfile', 'RegisteredUserController@allMaleProfile')->name('allMaleProfile');
@@ -94,6 +108,8 @@ Route::get('/registeredUserView/{id}', 'RegisteredUserController@registeredUserV
 Route::get('/pendingUserView/{id}', 'RegisteredUserController@pendingUserView');
 Route::get('/registeredUserDelete/{id}', 'RegisteredUserController@registeredUserDelete');
 Route::get('/pendingUserDelete/{id}', 'RegisteredUserController@pendingUserDelete');
+Route::get('/registeredGardian', 'RegisteredUserController@registeredGardian');
+Route::get('/registeredGardianDelete/{id}', 'RegisteredUserController@registeredGardianDelete');
 
 //Service
 Route::get('/service', 'ServiceController@index')->name('service');
@@ -125,5 +141,8 @@ Route::get('/userroleDelete/{id}', 'AddUserByAdminController@userroleDelete');
 Route::get('/userrole', 'AddUserByAdminController@userrole')->name('userrole');
 
 
+
+//Multi-Image Upload
+ Route::post('save-image', 'ImageController@save');
 
 

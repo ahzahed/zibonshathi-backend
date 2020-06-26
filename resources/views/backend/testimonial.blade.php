@@ -41,7 +41,7 @@
                       <td>{{$testimonial->name}}</td>
                       <td>{{$testimonial->testimonial}}</td>
                       <td>@if($testimonial->testimonial != NULL)
-                        <a href="{{ url('testimonialDelete/'.$testimonial->id) }}" class="btn btn-danger">Delete</a>
+                        <a href="{{ url('testimonialDelete/'.$testimonial->id) }}" id="delete" class="btn btn-danger">Delete</a>
                          @endif
                         </td>
                     </tr>

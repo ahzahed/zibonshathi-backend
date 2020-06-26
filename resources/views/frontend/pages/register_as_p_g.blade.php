@@ -26,11 +26,11 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="phone">{{ __('Phone Number') }}</label>
+                            <label for="userphone">{{ __('Phone Number') }}</label>
 
-                                <input id="phone" type="number" class="form-control @error('phone') is-invalid @enderror" name="phone" value="{{ old('phone') }}" required autocomplete="phone">
+                                <input id="userphone" type="number" class="form-control @error('userphone') is-invalid @enderror" name="userphone" value="{{ old('userphone') }}" required autocomplete="userphone">
 
-                                @error('phone')
+                                @error('userphone')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>

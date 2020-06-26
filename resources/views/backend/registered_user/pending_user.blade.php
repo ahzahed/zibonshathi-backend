@@ -10,18 +10,7 @@
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Total Pending User
-                @forelse($pendingUser as $pendingUsers)
-                <span class="badge badge-secondary">
-                {{ $loop->count }}
-                @break
-            </span>
-            @empty
-            <span class="badge badge-danger">
-                No user today
-            </span>
-                 @endforelse
-            </h6>
+
             </div>
             <div class="card-body">
               <div class="table-responsive">
@@ -37,12 +26,12 @@
                   </thead>
                   <tbody>
                       @foreach($pendingUser as $pendingUser)
-                      @if($pendingUser->user_type=="0" && $pendingUser->pending=="0")
+                      @if(($pendingUser->user_type=="0" && $pendingUser->pending=="0") || ($pendingUser->user_type=="5" && $pendingUser->pending=="0"))
                     <tr>
                       <td>{{$pendingUser->id}}</td>
                       <td>{{$pendingUser->name}}</td>
                       <td>{{$pendingUser->email}}</td>
-                      <td><a href="{{ url('pendingUserDelete/'.$pendingUser->id) }}" class="btn btn-danger">Delete</a></td>
+                      <td><a href="{{ url('pendingUserDelete/'.$pendingUser->id) }}" id="delete" class="btn btn-danger">Delete</a></td>
                       <td><a href="{{ url('pendingUserView/'.$pendingUser->id) }}" class="btn btn-primary">Details</a></td>
                       <td>@if($pendingUser->status==0)
                           <a href="{{ url('approveUser/'.$pendingUser->id) }}" class="btn btn-info">Approve</a>

@@ -19,13 +19,15 @@ class dashboardController extends Controller
             $female = User::where('gender', '=', 'Female')->get();
             $active = User::where('status', '=', 1)->get();
             $pending = User::where('status', '=', 0)->where('user_type', '=', 0)->get();
+            $payment = User::where('payment_id', '!=', NULL)->get();
 
             $male=$male->count();
             $female=$female->count();
             $active=$active->count();
             $pending=$pending->count();
+            $payment=$payment->count();
 
-            return view('backend.dashboard',compact('male','female','active','pending'));
+            return view('backend.dashboard',compact('male','female','active','pending','payment'));
         }
     }
 }
