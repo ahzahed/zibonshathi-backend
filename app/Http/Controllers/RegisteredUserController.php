@@ -210,7 +210,7 @@ class RegisteredUserController extends Controller
         if ($totalCharge == 99 || $totalCharge == 999){
             // Set your secret key. Remember to switch to your live secret key in production!
             // See your keys here: https://dashboard.stripe.com/account/apikeys
-            \Stripe\Stripe::setApiKey('sk_live_2TTEFRTfzDLiCPOxRLEhzYCY00NstkTAMZ');
+            \Stripe\Stripe::setApiKey('sk_test_3YMEwbMESG4wUJMyuWj8rxVF00LgfPi9hS');
 
             // Token is created using Checkout or Elements!
             // Get the payment token ID submitted by the form:
