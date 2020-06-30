@@ -5,7 +5,7 @@
         <div class="container-fluid">
 
           <!-- Page Heading -->
-          <h1 class="h3 mb-2 text-gray-800">Visitors Table</h1>
+          <h1 class="h3 mb-2 text-gray-800">Blog Table</h1>
 
           <!-- DataTales Example -->
           <div class="card shadow mb-4">
@@ -27,6 +27,7 @@
               <div class="table-responsive">
 
                 <a href="{{ url('/addBlog') }}" class="btn btn-info mb-2">Add Blog</a>
+                <a href="{{ url('/trash_blog') }}" class="btn btn-info mb-2">Trash/Restore</a>
 
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                   <thead>
@@ -52,11 +53,12 @@
                       <td>{{$blog->description}}</td>
                       <td><a href="{{ URL::to('blog/'.$blog->id) }}" class="btn btn-secondary">View</a></td>
                       <td><a href="{{ URL::to('blog/'.$blog->id.'/edit') }}" class="btn btn-primary">Edit</a></td>
-                      <td><form action="{{ URL::to('blog/'.$blog->id) }}" method="POST">
+                      {{-- <td><form action="{{ URL::to('blog/'.$blog->id) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-danger" type="submit" id="delete">Delete</button>
-                    </form></td>
+                    </form></td> --}}
+                        <td><a href="{{ url('blogDelete/'.$blog->id) }}" id="delete" class="btn btn-danger">Delete</a></td>
                       <td>@if($blog->status==0)
                         <a href="{{ url('blogActive/'.$blog->id) }}" class="btn btn-info">Active</a>
                         @else <a href="{{ url('blogDeactive/'.$blog->id) }}" class="btn btn-danger">Deactive</a> @endif

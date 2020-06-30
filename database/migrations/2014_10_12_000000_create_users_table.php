@@ -33,6 +33,7 @@ class CreateUsersTable extends Migration
             $table->tinyInteger('user_type')->default(0);
             $table->tinyInteger('status')->default(0);
             $table->tinyInteger('pending')->default(0);
+            $table->integer('priority')->default(0);
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
 
@@ -68,7 +69,12 @@ class CreateUsersTable extends Migration
             $table->string('payment_date')->nullable();
             $table->string('payment_exp')->nullable();
 
-            $table->rememberToken();
+            $table->string('gimage1')->nullable();
+            $table->string('gimage2')->nullable();
+            $table->string('gimage3')->nullable();
+            $table->string('gimage4')->nullable();
+
+            $table->rememberToken()->nullable();
             $table->timestamps();
         });
     }

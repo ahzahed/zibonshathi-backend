@@ -20,6 +20,7 @@
                       <th>User ID</th>
                       <th>Name</th>
                       <th>Email</th>
+                      <th>Register As</th>
                       <th colspan="2">Action</th>
                       <th>Status</th>
                     </tr>
@@ -31,6 +32,13 @@
                       <td>{{$pendingUser->id}}</td>
                       <td>{{$pendingUser->name}}</td>
                       <td>{{$pendingUser->email}}</td>
+                      <td>
+                        @if ($pendingUser->user_type=="0")
+                          Own
+                          @else
+                          Guardian/Parents
+                        @endif
+                    </td>
                       <td><a href="{{ url('pendingUserDelete/'.$pendingUser->id) }}" id="delete" class="btn btn-danger">Delete</a></td>
                       <td><a href="{{ url('pendingUserView/'.$pendingUser->id) }}" class="btn btn-primary">Details</a></td>
                       <td>@if($pendingUser->status==0)

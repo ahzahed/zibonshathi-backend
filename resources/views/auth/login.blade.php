@@ -70,6 +70,12 @@
                             </div>
                         </div>
                     </form>
+
+                    <div class="text-center">
+                        <h6 class="pt-3">OR</h6>
+                    <a href="{{ url('/auth/redirect/google') }}" style="border-right: 1px solid black;" class="pr-2">Gmail</a>
+                    <a href="{{ url('/login/facebook') }}">Facebook</a>
+                    </div>
                     <div class="already text-center">
                         <h6 class="mt-3">Not a Member?</h6>
                         <a class="nav-link"  href="{{ route('register') }}" role="button">Register Now</a>

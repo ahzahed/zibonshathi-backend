@@ -16,13 +16,14 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'password','user_type','status',
+        'password','user_type','status','priority',
         'name', 'email','provider','provider_id','gender','age','height', 'location','religion','mothertongue','occupation','maritalstatus','avatar',
         'details',
         'weight','bodytype','blood','smoke','complexion','dob','country','grewup',
         'fatherstatus','motherstatus','brothers','sisters',
         'education','university','income','workingwith','profession',
         'phone','userfacebook',
+        'gimage1','gimage2','gimage3','gimage4',
         'testimonial',
         'payment_id','paying_amount','blnc_transection','payment_date','payment_exp'
     ];

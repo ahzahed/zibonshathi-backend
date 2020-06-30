@@ -126,6 +126,10 @@
                             @endif
                             <button type="submit" class="log btn btn-primary">{{ __('Login') }}</button>
                         </form>
+                        <div class="text-center pt-3">
+                            <a href="{{ url('/auth/redirect/google') }}" style="border-right: 1px solid black;" class="pr-2">Gmail</a>
+                            <a href="{{ url('/login/facebook') }}">Facebook</a>
+                        </div>
                         <p>New to Zibonshathi?</p>
                         <div class="reg">
                             <a class="btn btn-primary" href="{{ route('register') }}" role="button">Register Now</a>

@@ -34,7 +34,7 @@ class BlogController extends Controller
     public function create()
     {
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
-            return view('backend.blog.blogAdd');
+            return view('backend.blog.blog_add');
         }
         return Redirect()->route('home');
     }
@@ -82,7 +82,7 @@ class BlogController extends Controller
     {
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $blog=Blog::findorfail($id);
-            return view('backend.blog.blogShow',compact('blog'));
+            return view('backend.blog.blog_show',compact('blog'));
         }
         return Redirect()->route('home');
     }
@@ -97,7 +97,7 @@ class BlogController extends Controller
     {
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $blog = Blog::findorfail($id);
-            return view('backend.blog.blogEdit',compact('blog'));
+            return view('backend.blog.blog_edit',compact('blog'));
         }
         return Redirect()->route('home');
     }
@@ -159,7 +159,7 @@ class BlogController extends Controller
 
     public function addBlog(){
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
-            return view('backend.blog/blogAdd');
+            return view('backend.blog.blog_add');
         }
         return Redirect()->route('home');
     }
@@ -171,14 +171,45 @@ class BlogController extends Controller
     function active($id){
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $changeValue = Blog::where('id',$id)->update(['status'=>1]);
-            return back();
+            return Redirect()->back();
         }
         return Redirect()->route('home');
     }
     function deactive($id){
         if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
             $changeValue = Blog::where('id',$id)->update(['status'=>0]);
-            return back();
+            return Redirect()->back();
+        }
+        return Redirect()->route('home');
+    }
+    function blogDelete($id){
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
+            Blog::find($id)->delete();
+            return Redirect()->back();
+        }
+        return Redirect()->route('home');
+    }
+    function trash_blog(){
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
+            $trash = Blog::onlyTrashed()->get();
+            return view('backend.blog.trash_blog',compact('trash'));
+        }
+        return Redirect()->route('home');
+    }
+    function blogForceDelete($id){
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
+            $blog=Blog::onlyTrashed()->find($id);
+            $image = $blog->image;
+            unlink($image);
+            Blog::onlyTrashed()->find($id)->forceDelete();
+            return Redirect()->back();
+        }
+        return Redirect()->route('home');
+    }
+    function blogRestore($id){
+        if (Auth::user()->user_type == 1 || Auth::user()->user_type == 2) {
+            Blog::onlyTrashed()->find($id)->restore();
+            return Redirect()->back();
         }
         return Redirect()->route('home');
     }

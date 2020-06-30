@@ -1,6 +1,141 @@
 @extends('frontend.app')
-<link rel="stylesheet" href="{{ asset('public/frontend/css/userProfile.css') }}" />
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+
+<style>
+    * {
+      box-sizing: border-box;
+    }
+
+    .gallery .row > .column {
+      padding: 0 8px;
+    }
+
+    .gallery .row:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+
+    .gallery .column {
+      float: left;
+      width: 25%;
+    }
+
+    /* The Modal (background) */
+    .gallery .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: black;
+    }
+
+    /* Modal Content */
+    .gallery .modal-content {
+      position: relative;
+      background-color: #fefefe;
+      margin: auto;
+      padding: 0;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    /* The Close Button */
+    .gallery .close {
+      color: white;
+      position: absolute;
+      top: 10px;
+      right: 25px;
+      font-size: 35px;
+      font-weight: bold;
+    }
+
+    .gallery .close:hover,
+    .gallery .close:focus {
+      color: #999;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .gallery .mySlides {
+      display: none;
+    }
+
+    .gallery .cursor {
+      cursor: pointer;
+    }
+
+    /* Next & previous buttons */
+    .gallery .prev,
+    .gallery .next {
+      cursor: pointer;
+      position: absolute;
+      top: 50%;
+      width: auto;
+      padding: 16px;
+      margin-top: -50px;
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+      transition: 0.6s ease;
+      border-radius: 0 3px 3px 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    /* Position the "next button" to the right */
+    .gallery .next {
+      right: 0;
+      border-radius: 3px 0 0 3px;
+    }
+
+    /* On hover, add a black background color with a little bit see-through */
+    .gallery .prev:hover,
+    .gallery .next:hover {
+      background-color: rgba(0, 0, 0, 0.8);
+    }
+
+    /* Number text (1/3 etc) */
+    .gallery .numbertext {
+      color: #f2f2f2;
+      font-size: 12px;
+      padding: 8px 12px;
+      position: absolute;
+      top: 0;
+    }
+
+    .gallery img {
+      margin-bottom: -4px;
+    }
+
+    .gallery .caption-container {
+      text-align: center;
+      background-color: black;
+      padding: 2px 16px;
+      color: white;
+    }
+
+    .gallery .demo {
+      opacity: 0.6;
+    }
+
+    .gallery .active,
+    .demo:hover {
+      opacity: 1;
+    }
+
+    .gallery img.hover-shadow {
+      transition: 0.3s;
+    }
+
+    .gallery .hover-shadow:hover {
+      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+    </style>
 @include('frontend.menu')
 <div class="container">
     @if (session()->has('success'))
@@ -216,20 +351,84 @@
                                     </div>
                                     <div class="col-lg-2 col-2">
                                         <div class="edit-btn text-right">
-                                            <a href="#" role="button" data-toggle="modal"
-                                                data-target="#gimage">Edit</a>
+                                            <a href="#" role="button" data-toggle="modal" data-target="#galleryimage">Edit</a>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="border-btm"></div>
-                                <div class="row">
-                                    <div class="col-lg-6 col-sm-6">
-                                        <div class="basics">
-                                            <p>coming soon</p>
+                                <div class="gallery border p-4 mt-2">
+                                    <div class="row">
+                                        <div class="column">
+                                            <img src="{{ asset($user->gimage1) }}" style="width:100%" onclick="openModal();currentSlide(1)"
+                                                class="hover-shadow cursor">
+                                        </div>
+                                        <div class="column">
+                                            <img src="{{ asset($user->gimage2) }}" style="width:100%" onclick="openModal();currentSlide(2)"
+                                                class="hover-shadow cursor">
+                                        </div>
+                                        <div class="column">
+                                            <img src="{{ asset($user->gimage3) }}" style="width:100%" onclick="openModal();currentSlide(3)"
+                                                class="hover-shadow cursor">
+                                        </div>
+                                        <div class="column">
+                                            <img src="{{ asset($user->gimage4) }}" style="width:100%" onclick="openModal();currentSlide(4)"
+                                                class="hover-shadow cursor">
+                                        </div>
+                                    </div>
+
+                                    <div id="myModal" class="modal" style="z-index: 999999">
+                                        <span class="close cursor" onclick="closeModal()">&times;</span>
+                                        <div class="modal-content">
+
+                                            <div class="mySlides">
+                                                <div class="numbertext">1 / 4</div>
+                                                <img src="{{ asset($user->gimage1) }}" style="width:100%">
+                                            </div>
+
+                                            <div class="mySlides">
+                                                <div class="numbertext">2 / 4</div>
+                                                <img src="{{ asset($user->gimage2) }}" style="width:100%">
+                                            </div>
+
+                                            <div class="mySlides">
+                                                <div class="numbertext">3 / 4</div>
+                                                <img src="{{ asset($user->gimage3) }}" style="width:100%">
+                                            </div>
+
+                                            <div class="mySlides">
+                                                <div class="numbertext">4 / 4</div>
+                                                <img src="{{ asset($user->gimage4) }}" style="width:100%">
+                                            </div>
+
+                                            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+                                            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+                                            <div class="caption-container">
+                                                <p id="caption"></p>
+                                            </div>
+
+
+                                            <div class="column">
+                                                <img class="demo cursor" src="{{ asset($user->gimage1) }}" style="width:100%" onclick="currentSlide(1)"
+                                                    alt="Nature and sunrise">
+                                            </div>
+                                            <div class="column">
+                                                <img class="demo cursor" src="{{ asset($user->gimage2) }}" style="width:100%" onclick="currentSlide(2)"
+                                                    alt="Snow">
+                                            </div>
+                                            <div class="column">
+                                                <img class="demo cursor" src="{{ asset($user->gimage3) }}" style="width:100%" onclick="currentSlide(3)"
+                                                    alt="Mountains and fjords">
+                                            </div>
+                                            <div class="column">
+                                                <img class="demo cursor" src="{{ asset($user->gimage4) }}" style="width:100%" onclick="currentSlide(4)"
+                                                    alt="Northern Lights">
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+
 
                         </div>
 
@@ -1341,7 +1540,7 @@
 
 <!-- Gallery Modal Start -->
 <div class="pro-edit-modal">
-    <div class="modal fade" id="gimage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    <div class="modal fade" id="galleryimage" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -1353,100 +1552,139 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form method='post' action='' enctype="multipart/form-data">
-                        <input type="file" id='files' name="files[]" multiple><br>
-                        <input type="button" id="submit" value='Upload'>
-                     </form>
-                     <!-- Preview -->
-                    <div id='preview'></div>
+                    <form method="POST" action="{{ url('update_gimage1/'.$user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="file-field">
+                            <div class="row">
+                                <div class=" col-md-8 mb-4">
+                                    <img id="original" src="" class=" z-depth-1-half avatar-pic" alt="">
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="btn btn-mdb-color btn-rounded float-left">
+                                            <input type="file" name="gimage1" id="gimage1" required=""> <br>
+                                            <button type="submit"
+                                                class="btn btn-secondary d-flex justify-content-center mt-3">submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-4 mb-4">
+                                    <img id="thumbImg" src="{{ asset($user->gimage1) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="POST" action="{{ url('update_gimage2/'.$user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="file-field">
+                            <div class="row">
+                                <div class=" col-md-8 mb-4">
+                                    <img id="original" src="" class=" z-depth-1-half avatar-pic" alt="">
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="btn btn-mdb-color btn-rounded float-left">
+                                            <input type="file" name="gimage2" id="gimage2" required=""> <br>
+                                            <button type="submit"
+                                                class="btn btn-secondary d-flex justify-content-center mt-3">submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-4 mb-4">
+                                    <img id="thumbImg" src="{{ asset($user->gimage2) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="POST" action="{{ url('update_gimage3/'.$user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="file-field">
+                            <div class="row">
+                                <div class=" col-md-8 mb-4">
+                                    <img id="original" src="" class=" z-depth-1-half avatar-pic" alt="">
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="btn btn-mdb-color btn-rounded float-left">
+                                            <input type="file" name="gimage3" id="gimage3" required=""> <br>
+                                            <button type="submit"
+                                                class="btn btn-secondary d-flex justify-content-center mt-3">submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-4 mb-4">
+                                    <img id="thumbImg" src="{{ asset($user->gimage3) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <form method="POST" action="{{ url('update_gimage4/'.$user->id) }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="file-field">
+                            <div class="row">
+                                <div class=" col-md-8 mb-4">
+                                    <img id="original" src="{{ url('update_gimage4/'.$user->id) }}" class=" z-depth-1-half avatar-pic" alt="">
+                                    <div class="d-flex justify-content-center mt-3">
+                                        <div class="btn btn-mdb-color btn-rounded float-left">
+                                            <input type="file" name="gimage4" id="gimage4" required=""> <br>
+                                            <button type="submit"
+                                                class="btn btn-secondary d-flex justify-content-center mt-3">submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class=" col-md-4 mb-4">
+                                    <img id="thumbImg" src="{{ asset($user->gimage4) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-<script>
-    $(document).ready(function(){
-
-    $('#submit').click(function(){
-
-       var form_data = new FormData();
-
-       // Read selected files
-       var totalfiles = document.getElementById('files').files.length;
-       for (var index = 0; index < totalfiles; index++) {
-          form_data.append("files[]", document.getElementById('files').files[index]);
-     $('#preview').append("<img src='"+URL.createObjectURL(event.target.files[i])+"'>");
-       }
-
-       // AJAX request
-       $.ajax({
-         url: 'ajaxUpload.php',
-         type: 'post',
-         data: form_data,
-         dataType: 'json',
-         contentType: false,
-         processData: false,
-         success: function (response) {
-            alert("Uploaded SuccessFully");
-            console.log(response);
-
-         }
-       });
-
-    });
-
-    });
-    </script>
-
 <!--  Gallery Modal End -->
 
 
+<script>
+    function openModal() {
+      document.getElementById("myModal").style.display = "block";
+    }
+
+    function closeModal() {
+      document.getElementById("myModal").style.display = "none";
+    }
+
+    var slideIndex = 1;
+    showSlides(slideIndex);
+
+    function plusSlides(n) {
+      showSlides(slideIndex += n);
+    }
+
+    function currentSlide(n) {
+      showSlides(slideIndex = n);
+    }
+
+    function showSlides(n) {
+      var i;
+      var slides = document.getElementsByClassName("mySlides");
+      var dots = document.getElementsByClassName("demo");
+      var captionText = document.getElementById("caption");
+      if (n > slides.length) {slideIndex = 1}
+      if (n < 1) {slideIndex = slides.length}
+      for (i = 0; i < slides.length; i++) {
+          slides[i].style.display = "none";
+      }
+      for (i = 0; i < dots.length; i++) {
+          dots[i].className = dots[i].className.replace(" active", "");
+      }
+      slides[slideIndex-1].style.display = "block";
+      dots[slideIndex-1].className += " active";
+      captionText.innerHTML = dots[slideIndex-1].alt;
+    }
+    </script>
 
 
 
 
 
 
-<!-- Multi Image view -->
-<!-- <div class="row border p-4 mt-2">
-            <div class="col-lg-12">
-                <h4>Details</h4>
-                <p class="text-justify">Lorem ipsum, or lipsum as it is sometimes known, is dummy text used in
-                    laying out print, graphic or web designs. The passage is attributed to an unknown typesetter in
-                    the 15th century who is thought to have scrambled parts of Ciceros De Finibus Bonorum et
-                    Malorum in a type specimen book.</p>
-            </div>
-        </div>
 
-        <div class="gallery border p-4 mt-2">
-            <h4>Gallery</h4>
-            <div class="row">
-                <div class="col-md-2 pt-2">
-                    <div class="ih-item square colored effect6 from_top_and_bottom">
-                        <a href="../images/team1.jpeg" data-lightbox="myGallery" data-title="">
-                            <div class="img">
-                                <img src="../images/team1.jpeg" height="50px" alt="img" class="img-fluid" />
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 pt-2">
-                    <div class="ih-item square colored effect6 from_top_and_bottom">
-                        <a href="../images/team2.jpeg" data-lightbox="myGallery" data-title="">
-                            <div class="img">
-                                <img src="../images/team2.jpeg" alt="img" class="img-fluid" />
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-md-2 pt-2">
-                    <div class="ih-item square colored effect6 from_top_and_bottom">
-                        <a href="../images/team3.jpeg" data-lightbox="myGallery" data-title="">
-                            <div class="img">
-                                <img src="../images/team3.jpeg" alt="img" class="img-fluid" />
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
+
+

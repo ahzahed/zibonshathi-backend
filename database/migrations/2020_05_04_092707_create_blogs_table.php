@@ -19,6 +19,7 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->text('description');
             $table->tinyInteger('status')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -31,5 +32,8 @@ class CreateBlogsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('blogs');
+        Schema::table('posts', function (Blueprint $table){
+            $table->dropColumn('deleted_at');
+        });
     }
 }

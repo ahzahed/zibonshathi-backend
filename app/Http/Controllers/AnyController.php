@@ -26,8 +26,8 @@ class AnyController extends Controller
         //     VisitorModel::where('ip_address',$ip_address)->update(['visit_time'=>$timeDate]);
         // }
 
-        $maleFeatured = User::where('gender', '=', 'Male')->where('user_type', '=', '0')->limit(4)->get();
-        $femaleFeatured = User::where('gender', '=', 'Female')->where('user_type', '=', '0')->limit(4)->get();
+        $maleFeatured = User::where('gender', '=', 'Male')->where('user_type', '=', '0')->limit(4)->orderBy('priority','desc')->get();
+        $femaleFeatured = User::where('gender', '=', 'Female')->where('user_type', '=', '0')->limit(4)->orderBy('priority','desc')->get();
         $service = Service::limit(4)->get();
         $testimonial = User::where('testimonial', '!=', NULL)->limit(2)->get();
         $blog = Blog::all();

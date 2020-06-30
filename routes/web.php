@@ -1,8 +1,13 @@
 <?php
 
+use App\Blog;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+//Soft Delete
+Route::get('/softDelete', function () {
+    Blog::find(1)->delete();
+});
 
 Route::get('/', 'AnyController@index');
 
@@ -26,18 +31,19 @@ Route::get('/viewProfile', 'RegisteredUserController@viewProfile')->name('viewPr
 
 //Socialite
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
- Route::get('/callback/{provider}', 'SocialController@callback');
+Route::get('/callback/{provider}', 'SocialController@callback');
 
-Route::get('/auth/redirect/{provider}', 'SocialController@fredirect');
-Route::get('/callback/{provider}', 'SocialController@fcallback');
+// Route::get('/auth/redirect/facebook', 'SocialController@fredirect');
+// Route::get('/callback/facebook', 'SocialController@fcallback');
 
-Route::get('/auth/redirect/{provider}', 'SocialController@lredirect');
- Route::get('/callback/{provider}', 'SocialController@lcallback');
+Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
+Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
+
 
 
 //Multi Image
 Route::get('multiple-image', 'ImageController@index');
- Route::post('multiple-save', 'ImageController@save');
+Route::post('multiple-save', 'ImageController@save');
 
 //Edit profile step by step
 Route::post('/update_user_header/{id}', 'RegisteredUserController@update_user_header');
@@ -46,6 +52,11 @@ Route::post('/update_user_basics/{id}', 'RegisteredUserController@update_user_ba
 Route::post('/update_user_education/{id}', 'RegisteredUserController@update_user_education');
 Route::post('/update_user_family/{id}', 'RegisteredUserController@update_user_family');
 Route::post('/update_user_contact/{id}', 'RegisteredUserController@update_user_contact');
+//Gallery
+Route::post('/update_gimage1/{id}', 'RegisteredUserController@update_gimage1');
+Route::post('/update_gimage2/{id}', 'RegisteredUserController@update_gimage2');
+Route::post('/update_gimage3/{id}', 'RegisteredUserController@update_gimage3');
+Route::post('/update_gimage4/{id}', 'RegisteredUserController@update_gimage4');
 
 
 Route::post('/testimonial/{id}', 'RegisteredUserController@testimonial');
@@ -95,9 +106,6 @@ Route::get('/helpdesk', 'AnyController@helpdesk')->name('helpdesk');
 //For Admin
 Route::get('/visitor', 'VisitorController@visitorIndex');
 
-//User Role
-Route::get('/dashboard', 'dashboardController@dashboard')->name('dashboard');
-
 // New Register maintain, For admin panel
 Route::get('/registeredUser', 'RegisteredUserController@index');
 Route::get('/registeredUserActive/{id}', 'RegisteredUserController@active');
@@ -128,9 +136,13 @@ Route::get('/serviceDeactive/{id}', 'ServiceController@deactive');
 Route::resource('blog', 'BlogController');
 Route::get('/addBlog', 'BlogController@addBlog');
 Route::get('/allBlog', 'BlogController@allBlog');
+Route::get('/trash_blog', 'BlogController@trash_blog');
 
 Route::get('/blogActive/{id}', 'BlogController@active');
 Route::get('/blogDeactive/{id}', 'BlogController@deactive');
+Route::get('/blogDelete/{id}', 'BlogController@blogDelete');
+Route::get('/blogForceDelete/{id}', 'BlogController@blogForceDelete');
+Route::get('/blogRestore/{id}', 'BlogController@blogRestore');
 
 /* Add User by admin */
 Route::get('/adduser_byadmin', 'AddUserByAdminController@adduser_byadmin')->name('adduser_byadmin');
@@ -143,6 +155,6 @@ Route::get('/userrole', 'AddUserByAdminController@userrole')->name('userrole');
 
 
 //Multi-Image Upload
- Route::post('save-image', 'ImageController@save');
+Route::post('save-image', 'ImageController@save');
 
 

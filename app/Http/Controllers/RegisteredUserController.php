@@ -126,8 +126,6 @@ class RegisteredUserController extends Controller
         return Redirect()->route('viewProfile');
     }
 
-
-
     public function update_user_family(Request $request, $id)
     {
         $data = $request->validate([
@@ -162,6 +160,91 @@ class RegisteredUserController extends Controller
         return Redirect()->route('viewProfile');
     }
 
+    public function update_gimage1(Request $request, $id)
+    {
+        $data = $request->validate([
+            'gimage1' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $data = array();
+
+        $avatarUpload = request()->file('gimage1');
+            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+            $avatarPath = public_path('/frontend/images/users');
+            $avatarUpload->move($avatarPath, $avatarName);
+            $data['gimage1'] = 'public/frontend/images/users/' . $avatarName;
+            $user = User::find($id);
+            $gimage1 = $user->gimage1;
+            if ($gimage1) {
+                unlink($gimage1);
+            }
+            $update = User::where('id', '=', $id)->update($data);
+            session()->flash('success', 'Your profile successfully updated');
+            return Redirect()->route('viewProfile');
+    }
+    public function update_gimage2(Request $request, $id)
+    {
+        $data = $request->validate([
+            'gimage2' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $data = array();
+
+        $avatarUpload = request()->file('gimage2');
+            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+            $avatarPath = public_path('/frontend/images/users');
+            $avatarUpload->move($avatarPath, $avatarName);
+            $data['gimage2'] = 'public/frontend/images/users/' . $avatarName;
+            $user = User::find($id);
+            $gimage2 = $user->gimage2;
+            if ($gimage2) {
+                unlink($gimage2);
+            }
+            $update = User::where('id', '=', $id)->update($data);
+            session()->flash('success', 'Your profile successfully updated');
+            return Redirect()->route('viewProfile');
+    }
+    public function update_gimage3(Request $request, $id)
+    {
+        $data = $request->validate([
+            'gimage3' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $data = array();
+
+        $avatarUpload = request()->file('gimage3');
+            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+            $avatarPath = public_path('/frontend/images/users');
+            $avatarUpload->move($avatarPath, $avatarName);
+            $data['gimage3'] = 'public/frontend/images/users/' . $avatarName;
+            $user = User::find($id);
+            $gimage3 = $user->gimage3;
+            if ($gimage3) {
+                unlink($gimage3);
+            }
+            $update = User::where('id', '=', $id)->update($data);
+            session()->flash('success', 'Your profile successfully updated');
+            return Redirect()->route('viewProfile');
+    }
+    public function update_gimage4(Request $request, $id)
+    {
+        $data = $request->validate([
+            'gimage4' => 'image|mimes:jpeg,png,jpg|max:2048',
+        ]);
+        $data = array();
+
+        $avatarUpload = request()->file('gimage4');
+            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+            $avatarPath = public_path('/frontend/images/users');
+            $avatarUpload->move($avatarPath, $avatarName);
+            $data['gimage4'] = 'public/frontend/images/users/' . $avatarName;
+            $user = User::find($id);
+            $gimage4 = $user->gimage4;
+            if ($gimage4) {
+                unlink($gimage4);
+            }
+            $update = User::where('id', '=', $id)->update($data);
+            session()->flash('success', 'Your profile successfully updated');
+            return Redirect()->route('viewProfile');
+    }
+
     public function viewProfile()
     {
         $user = User::where('id', Auth::id())->first();
@@ -171,16 +254,19 @@ class RegisteredUserController extends Controller
     public function detailsProfile($id)
     {
         $user = User::where('id', '=', $id)->first();
+        $priority = User::where('id', '=', $id)->first();
+        $value = ($priority->priority) + 1;
+        User::where('id',$id)->update(['priority'=>$value]);
         return view('frontend.pages.details_profile', compact('user'));
     }
     public function allMaleProfile()
     {
-        $maleFeatured = User::all();
+        $maleFeatured = User::orderBy('priority','desc')->get();
         return view('frontend.pages.all_male_profile', compact('maleFeatured'));
     }
     public function allFemaleProfile()
     {
-        $maleFeatured = User::all();
+        $maleFeatured = User::orderBy('priority','desc')->get();
         return view('frontend.pages.all_female_profile', compact('maleFeatured'));
     }
     public function testimonial(Request $request, $id)

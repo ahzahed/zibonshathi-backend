@@ -94,10 +94,10 @@
 
                     <div class="regis-btn text-center">
 
-                        <a href="{{ url('/auth/redirect/google') }}">Gmail</a>
-                    <a href="{{ url('/auth/redirect/linkedin') }}">Linkedin</a>
-                    <a href="{{ url('/auth/redirect/facebook') }}">Facebook</a>
-                    <a href="{{ url('/auth/redirect/twitter') }}">Twitter</a>
+                    <a href="{{ url('/auth/redirect/google') }}" style="border-right: 1px solid black;" class="pr-2">Gmail</a>
+                    <a href="{{ url('/login/facebook') }}">Facebook</a>
+                    {{-- <a href="{{ url('/auth/redirect/linkedin') }}">Linkedin</a> --}}
+                    {{-- <a href="{{ url('/auth/redirect/twitter') }}">Twitter</a> --}}
 
                 </div>
 

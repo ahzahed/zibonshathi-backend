@@ -42,10 +42,16 @@ return [
         'redirect' => 'http://localhost:8888/laravel/zibonshathi-backend/callback/linkedin',
     ],
 
+    // 'facebook' => [
+    //     'client_id' =>'295207995002552',
+    //     'client_secret' =>'a80e0477abd8507a5b7e691de2edd616',
+    //     'redirect' => 'http://localhost:8888/login/facebook/callback',
+    // ],
+
     'facebook' => [
-        'client_id' => '295207995002552',
-        'client_secret' => 'a80e0477abd8507a5b7e691de2edd616',
-        'redirect' => 'http://localhost:8888/laravel/zibonshathi-backend/callback/facebook',
+        'client_id' => env('FACEBOOK_CLIENT_ID'),
+        'client_secret' => env('FACEBOOK_CLIENT_SECRET'),
+        'redirect' => 'http://localhost:8888/laravel/zibonshathi-backend/login/facebook/callback',
     ],
 
     'twitter' => [

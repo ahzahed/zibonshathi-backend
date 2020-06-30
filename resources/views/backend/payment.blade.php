@@ -33,6 +33,7 @@
                       <th>Email</th>
                       <th>Payment ID</th>
                       <th>Paying Amount</th>
+                      <th>Package</th>
                       <th>Blance Transection</th>
                       <th>Payment Date</th>
                       <th>Payment Expired</th>
@@ -47,7 +48,14 @@
                       <td>{{$payment->name}}</td>
                       <td>{{$payment->email}}</td>
                       <td>{{$payment->payment_id}}</td>
-                      <td>{{($payment->paying_amount)/100}}</td>
+                      <td>$ {{($payment->paying_amount)/100}}</td>
+                      <td>
+                          @if(($payment->paying_amount)/100 == 99)
+                            Weekly
+                            @else
+                            Monthly
+                            @endif
+                      </td>
                       <td>{{$payment->blnc_transection}}</td>
                       <td>{{$payment->payment_date}}</td>
                       <td>{{$payment->payment_exp}}</td>

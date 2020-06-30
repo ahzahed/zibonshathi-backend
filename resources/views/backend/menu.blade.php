@@ -15,7 +15,7 @@
 
     <!-- Nav Item - Dashboard -->
     <li class="nav-item">
-        <a class="nav-link" href="{{url('/dashboard')}}">
+        <a class="nav-link" href="{{url('/home')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -31,7 +31,7 @@
     <!-- Nav Item - Pages Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/visitor')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-users fa-cog"></i>
             <span>Visitor</span>
         </a>
     </li>
@@ -40,7 +40,7 @@
     @if (Auth::user()->user_type == '1')
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/userrole')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-user-friends fa-cog"></i>
             <span>User Role</span>
         </a>
     </li>
@@ -49,7 +49,7 @@
     <!-- Nav Item - Utilities Collapse Menu -->
     <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#registration" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
+            <i class="fas fa-users-cog"></i>
             <span>User Management</span>
         </a>
         <div id="registration" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
@@ -78,7 +78,7 @@
     @endif
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/testimonial')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fas fa-file-alt"></i>
             <span>Testimonial</span>
         </a>
     </li>
@@ -91,7 +91,7 @@
 
     <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/blog')}}">
-            <i class="fas fa-fw fa-cog"></i>
+            <i class="fab fa-blogger"></i>
             <span>Blog</span>
         </a>
     </li>
