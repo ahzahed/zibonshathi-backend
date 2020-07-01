@@ -1,0 +1,5 @@
+Admin: 1
+Moderator: 2
+
+Normal User: 0
+Guardian/Parent: 5
