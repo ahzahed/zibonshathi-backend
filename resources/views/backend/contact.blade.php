@@ -51,6 +51,30 @@
                         <button class="btn btn-danger" id="delete" type="submit">Delete</button>
                       </form></td>
                       <td><a type="button" class="btn btn-info" data-toggle="modal" data-target="#replypeople">Reply</a></td>
+                      <!-- Reply User -->
+                      <div class="modal fade" id="replypeople" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered" role="document">
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLongTitle">Write a reply</h5>
+                              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                              </button>
+                            </div>
+                            <form action="{{ url('replypeople/'.$contact->id) }}" method="POST">
+                              @csrf
+                            <div class="modal-body">
+                                  <input type="hidden" value="{{ $contact->id }}">
+                                  <textarea class="form-control" name="replypeople" id="" cols="30" rows="10"></textarea>
+                            </div>
+                            <div class="modal-footer">
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                              <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
+                          </form>
+                          </div>
+                        </div>
+                      </div>
                     </tr>
                     @endforeach
                   </tbody>
@@ -62,30 +86,4 @@
         </div>
         <!-- /.container-fluid -->
 
-
-
-        <!-- Reply User -->
-<div class="modal fade" id="replypeople" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Write a reply</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <form action="{{ url('replypeople/'.$contact->id) }}" method="POST">
-        @csrf
-      <div class="modal-body">
-            <input type="hidden" value="{{ $contact->id }}">
-            <textarea class="form-control" name="replypeople" id="" cols="30" rows="10"></textarea>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary">Send</button>
-      </div>
-    </form>
-    </div>
-  </div>
-</div>
 @endsection

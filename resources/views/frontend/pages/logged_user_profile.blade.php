@@ -359,19 +359,19 @@
                                 <div class="gallery border p-4 mt-2">
                                     <div class="row">
                                         <div class="column">
-                                            <img src="{{ asset($user->gimage1) }}" style="width:100%" onclick="openModal();currentSlide(1)"
+                                            <img src="{{ asset($user->gimage1) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(1)"
                                                 class="hover-shadow cursor">
                                         </div>
                                         <div class="column">
-                                            <img src="{{ asset($user->gimage2) }}" style="width:100%" onclick="openModal();currentSlide(2)"
+                                            <img src="{{ asset($user->gimage2) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(2)"
                                                 class="hover-shadow cursor">
                                         </div>
                                         <div class="column">
-                                            <img src="{{ asset($user->gimage3) }}" style="width:100%" onclick="openModal();currentSlide(3)"
+                                            <img src="{{ asset($user->gimage3) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(3)"
                                                 class="hover-shadow cursor">
                                         </div>
                                         <div class="column">
-                                            <img src="{{ asset($user->gimage4) }}" style="width:100%" onclick="openModal();currentSlide(4)"
+                                            <img src="{{ asset($user->gimage4) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(4)"
                                                 class="hover-shadow cursor">
                                         </div>
                                     </div>

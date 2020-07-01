@@ -115,8 +115,62 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Country</label>
+                            <label>Location</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->location }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Country Now Live In</label>
                             <input type="text" class="form-control" value="{{ $registeredUser->country }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Mother Tongue</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->mothertongue }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Grew Up</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->grewup }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Father Status</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->fatherstatus }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Mother Status</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->motherstatus }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Brothers</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->brothers }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Sisters</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->sisters }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>University</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->university }}" readonly>
                         </div>
                     </div>
 
@@ -133,32 +187,42 @@
                             <input type="text" class="form-control" value="{{ $registeredUser->profession }}" readonly>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Income</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->income }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Income</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->workingwith }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Income</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->userphone }}" readonly>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Income</label>
+                            <input type="text" class="form-control" value="{{ $registeredUser->userfacebook }}" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>About Details</label>
+                            <textarea type="text" class="form-control" readonly>{{ $registeredUser->details }}</textarea>
+                        </div>
+                    </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label>Testimonial</label>
                             <input type="text" class="form-control" value="{{ $registeredUser->testimonial }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Payment ID</label>
-                            <input type="text" class="form-control" value="{{ $registeredUser->payment_id }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Paying Amount</label>
-                            <input type="text" class="form-control" value="{{ $registeredUser->paying_amount }}" readonly>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label>Blance Transection</label>
-                            <input type="text" class="form-control" value="{{ $registeredUser->blnc_transection }}" readonly>
                         </div>
                     </div>
 
@@ -182,6 +246,42 @@
                             <div class="col-md-4">
                                 <div class="profile-img">
                                     <img style="height: 150px; width:150px" src="{{ asset($registeredUser->avatar) }}" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img style="height: 150px; width:150px" src="{{ asset($registeredUser->gimage1) }}" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img style="height: 150px; width:150px" src="{{ asset($registeredUser->gimage2) }}" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img style="height: 150px; width:150px" src="{{ asset($registeredUser->gimage3) }}" alt="" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <div class="col-md-4">
+                                <div class="profile-img">
+                                    <img style="height: 150px; width:150px" src="{{ asset($registeredUser->gimage4) }}" alt="" />
                                 </div>
                             </div>
                         </div>
