@@ -459,7 +459,7 @@
                                         <h6><strong>Name : </strong>{{ $user->name }}</h6>
                                         <h6><strong>Email : </strong>{{ $user->email }}</h6>
                                         <h6>
-                                            <span><strong>Phone Number : </strong>{{ $user->phone }}</span>
+                                            <span><strong>Phone Number : </strong>{{ $user->userphone }}</span>
                                         </h6>
 
                                     </div>

@@ -22,7 +22,7 @@ public function callback($provider)
 
     auth()->login($user);
 
-    return redirect()->to('/home');
+    return redirect()->to('/');
 
 }
 function createUser($getInfo,$provider){
@@ -49,7 +49,7 @@ function createUser($getInfo,$provider){
     $getInfo = Socialite::driver($provider)->user();
     $user = $this->createUser($getInfo,$provider);
     auth()->login($user);
-    return redirect()->to('/home');
+    return redirect()->to('/');
     }
 
 

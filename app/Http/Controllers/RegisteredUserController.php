@@ -2,11 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\InvoiceMail;
 use App\User;
 use Carbon\Carbon;
 use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
+use Illuminate\Support\Facades\Mail;
+use Stripe\Invoice;
 
 class RegisteredUserController extends Controller
 {
@@ -168,18 +172,18 @@ class RegisteredUserController extends Controller
         $data = array();
 
         $avatarUpload = request()->file('gimage1');
-            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
-            $avatarPath = public_path('/frontend/images/users');
-            $avatarUpload->move($avatarPath, $avatarName);
-            $data['gimage1'] = 'public/frontend/images/users/' . $avatarName;
-            $user = User::find($id);
-            $gimage1 = $user->gimage1;
-            if ($gimage1) {
-                unlink($gimage1);
-            }
-            $update = User::where('id', '=', $id)->update($data);
-            session()->flash('success', 'Your profile successfully updated');
-            return Redirect()->route('viewProfile');
+        $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+        $avatarPath = public_path('/frontend/images/users');
+        $avatarUpload->move($avatarPath, $avatarName);
+        $data['gimage1'] = 'public/frontend/images/users/' . $avatarName;
+        $user = User::find($id);
+        $gimage1 = $user->gimage1;
+        if ($gimage1) {
+            unlink($gimage1);
+        }
+        $update = User::where('id', '=', $id)->update($data);
+        session()->flash('success', 'Your profile successfully updated');
+        return Redirect()->route('viewProfile');
     }
     public function update_gimage2(Request $request, $id)
     {
@@ -189,18 +193,18 @@ class RegisteredUserController extends Controller
         $data = array();
 
         $avatarUpload = request()->file('gimage2');
-            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
-            $avatarPath = public_path('/frontend/images/users');
-            $avatarUpload->move($avatarPath, $avatarName);
-            $data['gimage2'] = 'public/frontend/images/users/' . $avatarName;
-            $user = User::find($id);
-            $gimage2 = $user->gimage2;
-            if ($gimage2) {
-                unlink($gimage2);
-            }
-            $update = User::where('id', '=', $id)->update($data);
-            session()->flash('success', 'Your profile successfully updated');
-            return Redirect()->route('viewProfile');
+        $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+        $avatarPath = public_path('/frontend/images/users');
+        $avatarUpload->move($avatarPath, $avatarName);
+        $data['gimage2'] = 'public/frontend/images/users/' . $avatarName;
+        $user = User::find($id);
+        $gimage2 = $user->gimage2;
+        if ($gimage2) {
+            unlink($gimage2);
+        }
+        $update = User::where('id', '=', $id)->update($data);
+        session()->flash('success', 'Your profile successfully updated');
+        return Redirect()->route('viewProfile');
     }
     public function update_gimage3(Request $request, $id)
     {
@@ -210,18 +214,18 @@ class RegisteredUserController extends Controller
         $data = array();
 
         $avatarUpload = request()->file('gimage3');
-            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
-            $avatarPath = public_path('/frontend/images/users');
-            $avatarUpload->move($avatarPath, $avatarName);
-            $data['gimage3'] = 'public/frontend/images/users/' . $avatarName;
-            $user = User::find($id);
-            $gimage3 = $user->gimage3;
-            if ($gimage3) {
-                unlink($gimage3);
-            }
-            $update = User::where('id', '=', $id)->update($data);
-            session()->flash('success', 'Your profile successfully updated');
-            return Redirect()->route('viewProfile');
+        $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+        $avatarPath = public_path('/frontend/images/users');
+        $avatarUpload->move($avatarPath, $avatarName);
+        $data['gimage3'] = 'public/frontend/images/users/' . $avatarName;
+        $user = User::find($id);
+        $gimage3 = $user->gimage3;
+        if ($gimage3) {
+            unlink($gimage3);
+        }
+        $update = User::where('id', '=', $id)->update($data);
+        session()->flash('success', 'Your profile successfully updated');
+        return Redirect()->route('viewProfile');
     }
     public function update_gimage4(Request $request, $id)
     {
@@ -231,18 +235,18 @@ class RegisteredUserController extends Controller
         $data = array();
 
         $avatarUpload = request()->file('gimage4');
-            $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
-            $avatarPath = public_path('/frontend/images/users');
-            $avatarUpload->move($avatarPath, $avatarName);
-            $data['gimage4'] = 'public/frontend/images/users/' . $avatarName;
-            $user = User::find($id);
-            $gimage4 = $user->gimage4;
-            if ($gimage4) {
-                unlink($gimage4);
-            }
-            $update = User::where('id', '=', $id)->update($data);
-            session()->flash('success', 'Your profile successfully updated');
-            return Redirect()->route('viewProfile');
+        $avatarName = time() . '.' . $avatarUpload->getClientOriginalExtension();
+        $avatarPath = public_path('/frontend/images/users');
+        $avatarUpload->move($avatarPath, $avatarName);
+        $data['gimage4'] = 'public/frontend/images/users/' . $avatarName;
+        $user = User::find($id);
+        $gimage4 = $user->gimage4;
+        if ($gimage4) {
+            unlink($gimage4);
+        }
+        $update = User::where('id', '=', $id)->update($data);
+        session()->flash('success', 'Your profile successfully updated');
+        return Redirect()->route('viewProfile');
     }
 
     public function viewProfile()
@@ -253,20 +257,21 @@ class RegisteredUserController extends Controller
 
     public function detailsProfile($id)
     {
+        $id = Crypt::decrypt($id);
         $user = User::where('id', '=', $id)->first();
         $priority = User::where('id', '=', $id)->first();
         $value = ($priority->priority) + 1;
-        User::where('id',$id)->update(['priority'=>$value]);
+        User::where('id', $id)->update(['priority' => $value]);
         return view('frontend.pages.details_profile', compact('user'));
     }
     public function allMaleProfile()
     {
-        $maleFeatured = User::orderBy('priority','desc')->get();
+        $maleFeatured = User::orderBy('priority', 'desc')->get();
         return view('frontend.pages.all_male_profile', compact('maleFeatured'));
     }
     public function allFemaleProfile()
     {
-        $maleFeatured = User::orderBy('priority','desc')->get();
+        $maleFeatured = User::orderBy('priority', 'desc')->get();
         return view('frontend.pages.all_female_profile', compact('maleFeatured'));
     }
     public function testimonial(Request $request, $id)
@@ -293,7 +298,7 @@ class RegisteredUserController extends Controller
     public function stripeCharge(Request $request)
     {
         $totalCharge = $request->totalCharge;
-        if ($totalCharge == 99 || $totalCharge == 999){
+        if ($totalCharge == 99 || $totalCharge == 999) {
             // Set your secret key. Remember to switch to your live secret key in production!
             // See your keys here: https://dashboard.stripe.com/account/apikeys
             \Stripe\Stripe::setApiKey('sk_test_3YMEwbMESG4wUJMyuWj8rxVF00LgfPi9hS');
@@ -303,19 +308,22 @@ class RegisteredUserController extends Controller
             $token = $_POST['stripeToken'];
 
             $charge = \Stripe\Charge::create([
-                'amount' => $totalCharge*100,
+                'amount' => $totalCharge * 100,
                 'currency' => 'usd',
                 'description' => 'Zibonshathi Payment',
                 'source' => $token,
                 'metadata' => ['order_id' => '6735'],
             ]);
-        }else{
+        } else {
             session()->flash('danger', 'Select any package');
             return Redirect()->route('viewProfile');
         }
         if ($totalCharge == 99) {
 
             $id = Auth::user()->id;
+            $email = Auth::user()->email;
+            $name = Auth::user()->name;
+            $package = "Weekly";
 
             $data = array();
             $data['payment_id'] = $charge->payment_method;
@@ -325,10 +333,24 @@ class RegisteredUserController extends Controller
             $date = Carbon::now();
             $data['payment_exp'] = $date->addWeek();
             $update = User::where('id', '=', $id)->update($data);
+
+            //Send Payment Invoice
+            $post = new Invoice();
+            $post->payment_date = Carbon::now();
+            $post->payment_id = $charge->payment_method;
+            $post->name = $name;
+            $post->email = $email;
+            $post->package = $package;
+            $post->paying_amount = $charge->amount;
+
+            Mail::to($email)->send(new InvoiceMail($post));
             session()->flash('success', 'Your weekly payment successfully accepted');
             return Redirect()->route('viewProfile');
-        } else if ($totalCharge == 999){
+        } else if ($totalCharge == 999) {
             $id = Auth::user()->id;
+            $email = Auth::user()->email;
+            $name = Auth::user()->name;
+            $package = "Monthly";
 
             $data = array();
             $data['payment_id'] = $charge->payment_method;
@@ -338,9 +360,20 @@ class RegisteredUserController extends Controller
             $date = Carbon::now();
             $data['payment_exp'] = $date->addMonth();
             $update = User::where('id', '=', $id)->update($data);
+
+            //Send Payment Invoice
+            $post = new Invoice();
+            $post->payment_date = Carbon::now();
+            $post->payment_id = $charge->payment_method;
+            $post->name = $name;
+            $post->email = $email;
+            $post->package = $package;
+            $post->paying_amount = $charge->amount;
+
+            Mail::to($email)->send(new InvoiceMail($post));
             session()->flash('success', 'Your monthly payment successfully accepted');
             return Redirect()->route('viewProfile');
-        }else{
+        } else {
             session()->flash('danger', 'Select any package');
             return Redirect()->route('viewProfile');
         }
