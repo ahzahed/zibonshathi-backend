@@ -1,4 +1,5 @@
 @extends('frontend.app')
+@section('content')
 
 @include('frontend.menu')
 <!-- Featured Male Profile Part Start -->
@@ -17,7 +18,7 @@
                         <span>Height: {{ $maleFeatured->height }}</span>
                         <span>Religion: {{ $maleFeatured->religion }}</span>
                         @if (Auth::check())
-                        <a href="{{ url('detailsProfile/'.$maleFeatured->id) }}" class="btn btn-primary">View
+                        <a href="{{ url('detailsProfile/'.Crypt::encrypt($maleFeatured->id)) }}" class="btn btn-primary">View
                             Profile</a>
                         @else
                         <a data-toggle="modal" data-target="#login" class="btn btn-primary">View Profile</a>
@@ -30,4 +31,5 @@
         </div>
     </div>
 </section>
+@endsection
 <!-- Featured Male Profile Part End -->

@@ -41,25 +41,11 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-    public function redirectToProvider()
-    {
-        return Socialite::driver('facebook')->redirect();
-    }
 
     /**
      * Obtain the user information from GitHub.
      *
      * @return \Illuminate\Http\Response
      */
-    public function handleProviderCallback()
-    {
-        $user = Socialite::driver('facebook')->user();
-        $user=User::firstOrCreate([
-            'name'=>$user->getName(),
-            'email'=>$user->getEmail(),
-            'provider_id'=>$user->getId()
-        ]);
-        Auth::login($user,true);
-        return redirect('/');
-    }
+
 }

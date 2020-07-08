@@ -1,45 +1,52 @@
 @extends('frontend.app')
-@include('frontend.menu')
 @section('content')
+@include('frontend.menu')
 <!-- Registration Part Start -->
 <section id="registration">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-6 mx-auto">
-        <div class="regis-form">
-          <div class="regis-img text-center">
-            <img src="{{ asset('public/frontend/images/zibonshathi.png') }}" alt="logo" style="height: 100px;">
-          </div>
-          <h3>Lets set up your account, while
-            we find Matches for you!</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 mx-auto">
+                <div class="regis-form">
+                    <div class="regis-img text-center">
+                        <img src="{{ asset('public/frontend/images/zibonshathi.png') }}" alt="logo"
+                            style="height: 100px;">
+                    </div>
+                    <h3>Lets set up your account, while
+                        we find Matches for you!</h3>
 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                            <label for="email"
+                                class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                                <input id="email" type="email" placeholder="Email Address"
+                                    class="form-control @error('email') is-invalid @enderror" name="email"
+                                    value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                            <label for="password"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
                             <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                                <input id="password" placeholder="Password" type="password"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="current-password">
 
                                 @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                         </div>
@@ -47,7 +54,8 @@
                         <div class="form-group row">
                             <div class="col-md-6 offset-md-4">
                                 <div class="form-check">
-                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                                        {{ old('remember') ? 'checked' : '' }}>
 
                                     <label class="form-check-label" for="remember">
                                         {{ __('Remember Me') }}
@@ -63,9 +71,9 @@
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
-                                        {{ __('Forgot Your Password?') }}
-                                    </a>
+                                <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    {{ __('Forgot Your Password?') }}
+                                </a>
                                 @endif
                             </div>
                         </div>
@@ -73,20 +81,20 @@
 
                     <div class="text-center">
                         <h6 class="pt-3">OR</h6>
-                    <a href="{{ url('/auth/redirect/google') }}" style="border-right: 1px solid black;" class="pr-2">Gmail</a>
-                    <a href="{{ url('/login/facebook') }}">Facebook</a>
+                        <a href="{{ url('/auth/redirect/google') }}" style="border-right: 1px solid black;"
+                            class="pr-2">Gmail</a>
+                        <a href="{{ url('/auth/redirect/facebook') }}">Facebook</a>
                     </div>
                     <div class="already text-center">
                         <h6 class="mt-3">Not a Member?</h6>
-                        <a class="nav-link"  href="{{ route('register') }}" role="button">Register Now</a>
+                        <a class="nav-link" href="{{ route('register') }}" role="button">Register Now</a>
 
-                      </div>
                     </div>
-                  </div>
                 </div>
-              </div>
-            </section>
+            </div>
+        </div>
+    </div>
+</section>
 
 
 @endsection
-

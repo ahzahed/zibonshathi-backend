@@ -1,140 +1,142 @@
 @extends('frontend.app')
+
+@section('content')
 <style>
     * {
-      box-sizing: border-box;
+        box-sizing: border-box;
     }
 
-    .gallery .row > .column {
-      padding: 0 8px;
+    .gallery .row>.column {
+        padding: 0 8px;
     }
 
     .gallery .row:after {
-      content: "";
-      display: table;
-      clear: both;
+        content: "";
+        display: table;
+        clear: both;
     }
 
     .gallery .column {
-      float: left;
-      width: 25%;
+        float: left;
+        width: 25%;
     }
 
     /* The Modal (background) */
     .gallery .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      padding-top: 100px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: black;
+        display: none;
+        position: fixed;
+        z-index: 1;
+        padding-top: 100px;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        overflow: auto;
+        background-color: black;
     }
 
     /* Modal Content */
     .gallery .modal-content {
-      position: relative;
-      background-color: #fefefe;
-      margin: auto;
-      padding: 0;
-      width: 90%;
-      max-width: 1200px;
+        position: relative;
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        width: 90%;
+        max-width: 1200px;
     }
 
     /* The Close Button */
     .gallery .close {
-      color: white;
-      position: absolute;
-      top: 10px;
-      right: 25px;
-      font-size: 35px;
-      font-weight: bold;
+        color: white;
+        position: absolute;
+        top: 10px;
+        right: 25px;
+        font-size: 35px;
+        font-weight: bold;
     }
 
     .gallery .close:hover,
     .gallery .close:focus {
-      color: #999;
-      text-decoration: none;
-      cursor: pointer;
+        color: #999;
+        text-decoration: none;
+        cursor: pointer;
     }
 
     .gallery .mySlides {
-      display: none;
+        display: none;
     }
 
     .gallery .cursor {
-      cursor: pointer;
+        cursor: pointer;
     }
 
     /* Next & previous buttons */
     .gallery .prev,
     .gallery .next {
-      cursor: pointer;
-      position: absolute;
-      top: 50%;
-      width: auto;
-      padding: 16px;
-      margin-top: -50px;
-      color: white;
-      font-weight: bold;
-      font-size: 20px;
-      transition: 0.6s ease;
-      border-radius: 0 3px 3px 0;
-      user-select: none;
-      -webkit-user-select: none;
+        cursor: pointer;
+        position: absolute;
+        top: 50%;
+        width: auto;
+        padding: 16px;
+        margin-top: -50px;
+        color: white;
+        font-weight: bold;
+        font-size: 20px;
+        transition: 0.6s ease;
+        border-radius: 0 3px 3px 0;
+        user-select: none;
+        -webkit-user-select: none;
     }
 
     /* Position the "next button" to the right */
     .gallery .next {
-      right: 0;
-      border-radius: 3px 0 0 3px;
+        right: 0;
+        border-radius: 3px 0 0 3px;
     }
 
     /* On hover, add a black background color with a little bit see-through */
     .gallery .prev:hover,
     .gallery .next:hover {
-      background-color: rgba(0, 0, 0, 0.8);
+        background-color: rgba(0, 0, 0, 0.8);
     }
 
     /* Number text (1/3 etc) */
     .gallery .numbertext {
-      color: #f2f2f2;
-      font-size: 12px;
-      padding: 8px 12px;
-      position: absolute;
-      top: 0;
+        color: #f2f2f2;
+        font-size: 12px;
+        padding: 8px 12px;
+        position: absolute;
+        top: 0;
     }
 
     .gallery img {
-      margin-bottom: -4px;
+        margin-bottom: -4px;
     }
 
     .gallery .caption-container {
-      text-align: center;
-      background-color: black;
-      padding: 2px 16px;
-      color: white;
+        text-align: center;
+        background-color: black;
+        padding: 2px 16px;
+        color: white;
     }
 
     .gallery .demo {
-      opacity: 0.6;
+        opacity: 0.6;
     }
 
     .gallery .active,
     .demo:hover {
-      opacity: 1;
+        opacity: 1;
     }
 
     .gallery img.hover-shadow {
-      transition: 0.3s;
+        transition: 0.3s;
     }
 
     .gallery .hover-shadow:hover {
-      box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
-    </style>
+</style>
 @include('frontend.menu')
 <!-- View Profile Part Start -->
 <section id="v-profile">
@@ -145,7 +147,11 @@
                     <div class="row">
                         <div class="col-lg-2 col-8 mx-auto col-sm-4 col-md-3">
                             <div class="pro-img">
-                                <img src="{{ asset($user->avatar) }}" alt="img" style="height: 120px;" class="w-100">
+                                @if ($user->avatar == NULL)
+                                <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 150px;" class="w-100">
+                                @else
+                                <img src="{{ asset($user->avatar) }}" alt="img" style="height: 150px;" class="w-100">
+                                @endif
                             </div>
                         </div>
                         <div class="col-lg-8 col-sm-8 col-md-7">
@@ -299,7 +305,7 @@
                                                 <h6><strong>Email : </strong>{{ $user->email }}</h6>
                                             </div>
                                         </div>
-                                    @endif
+                                        @endif
                                 </div>
                             </div>
 
@@ -318,26 +324,50 @@
                                         @else
                                         <div class="gallery border p-4 mt-2">
                                             {{-- <div class="row"> --}}
-                                                <div class="column col-md-2">
-                                                    <img src="{{ asset($user->avatar) }}" style="height: 150px; width: 100%" onclick="openModal();currentSlide(1)"
-                                                        class="hover-shadow cursor">
-                                                </div>
-                                                <div class="column col-md-2">
-                                                    <img src="{{ asset($user->gimage1) }}" style="height: 150px; width: 100%" onclick="openModal();currentSlide(2)"
-                                                        class="hover-shadow cursor">
-                                                </div>
-                                                <div class="column col-md-2">
-                                                    <img src="{{ asset($user->gimage2) }}" style="height: 150px; width: 100%" onclick="openModal();currentSlide(3)"
-                                                        class="hover-shadow cursor">
-                                                </div>
-                                                <div class="column col-md-2">
-                                                    <img src="{{ asset($user->gimage3) }}" style="height: 150px; width: 100%" onclick="openModal();currentSlide(4)"
-                                                        class="hover-shadow cursor">
-                                                </div>
-                                                <div class="column col-md-2">
-                                                    <img src="{{ asset($user->gimage4) }}" style="height: 150px; width: 100%" onclick="openModal();currentSlide(5)"
-                                                        class="hover-shadow cursor">
-                                                </div>
+                                            <div class="column col-md-2">
+                                                @if ($user->avatar == NULL)
+                                                    <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                                @else
+                                                <img src="{{ asset($user->avatar) }}" style="height: 150px; width: 100%"
+                                                    onclick="openModal();currentSlide(1)" class="hover-shadow cursor">
+                                                    @endif
+                                            </div>
+                                            <div class="column col-md-2">
+                                                @if ($user->gimage1 == NULL)
+                                                    <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                                @else
+                                                <img src="{{ asset($user->gimage1) }}"
+                                                    style="height: 150px; width: 100%"
+                                                    onclick="openModal();currentSlide(2)" class="hover-shadow cursor">
+                                                    @endif
+                                            </div>
+                                            <div class="column col-md-2">
+                                                @if ($user->gimage2 == NULL)
+                                                    <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                                @else
+                                                <img src="{{ asset($user->gimage2) }}"
+                                                    style="height: 150px; width: 100%"
+                                                    onclick="openModal();currentSlide(3)" class="hover-shadow cursor">
+                                                    @endif
+                                            </div>
+                                            <div class="column col-md-2">
+                                                @if ($user->gimage3 == NULL)
+                                                    <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                                @else
+                                                <img src="{{ asset($user->gimage3) }}"
+                                                    style="height: 150px; width: 100%"
+                                                    onclick="openModal();currentSlide(4)" class="hover-shadow cursor">
+                                                    @endif
+                                            </div>
+                                            <div class="column col-md-2">
+                                                @if ($user->gimage4 == NULL)
+                                                    <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                                @else
+                                                <img src="{{ asset($user->gimage4) }}"
+                                                    style="height: 150px; width: 100%"
+                                                    onclick="openModal();currentSlide(5)" class="hover-shadow cursor">
+                                                    @endif
+                                            </div>
                                             {{-- </div> --}}
 
                                             <div id="myModal" class="modal" style="z-index: 999999">
@@ -376,29 +406,29 @@
 
 
                                                     <div class="column">
-                                                        <img class="demo cursor" src="{{ asset($user->avatar) }}" style="width:100%" onclick="currentSlide(1)"
-                                                            alt="">
+                                                        <img class="demo cursor" src="{{ asset($user->avatar) }}"
+                                                            style="width:100%" onclick="currentSlide(1)" alt="">
                                                     </div>
                                                     <div class="column">
-                                                        <img class="demo cursor" src="{{ asset($user->gimage1) }}" style="width:100%" onclick="currentSlide(2)"
-                                                            alt="">
+                                                        <img class="demo cursor" src="{{ asset($user->gimage1) }}"
+                                                            style="width:100%" onclick="currentSlide(2)" alt="">
                                                     </div>
                                                     <div class="column">
-                                                        <img class="demo cursor" src="{{ asset($user->gimage2) }}" style="width:100%" onclick="currentSlide(3)"
-                                                            alt="">
+                                                        <img class="demo cursor" src="{{ asset($user->gimage2) }}"
+                                                            style="width:100%" onclick="currentSlide(3)" alt="">
                                                     </div>
                                                     <div class="column">
-                                                        <img class="demo cursor" src="{{ asset($user->gimage3) }}" style="width:100%" onclick="currentSlide(4)"
-                                                            alt="">
+                                                        <img class="demo cursor" src="{{ asset($user->gimage3) }}"
+                                                            style="width:100%" onclick="currentSlide(4)" alt="">
                                                     </div>
                                                     <div class="column">
-                                                        <img class="demo cursor" src="{{ asset($user->gimage4) }}" style="width:100%" onclick="currentSlide(5)"
-                                                            alt="">
+                                                        <img class="demo cursor" src="{{ asset($user->gimage4) }}"
+                                                            style="width:100%" onclick="currentSlide(5)" alt="">
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    @endif
+                                        @endif
                                 </div>
                             </div>
 
@@ -411,6 +441,7 @@
     </div>
 </section>
 <!-- View Profile Part End -->
+
 
 <!-- Modal -->
 <div class="modal fade" id="contactUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -429,14 +460,14 @@
                     <div class="form-group">
                         <ul>
                             <li><input type="radio" name="payment" value="paypal"><img
-                                    src="{{ asset('public/frontend/images/PayPal.png') }}" style="width: 100px" alt="">
+                                    src="{{ asset('public/frontend/images/stripe.png') }}" style="width: 100px" alt="">
                             </li>
-                            <li><input type="radio" name="payment" value="mastercard"><img
+                            {{--  <li><input type="radio" name="payment" value="mastercard"><img
                                     src="{{ asset('public/frontend/images/mastercard.png') }}" style="width: 100px"
                                     alt=""></li>
                             <li><input type="radio" name="payment" value="visa"><img
                                     src="{{ asset('public/frontend/images/visa.png') }}" style="width: 100px" alt="">
-                            </li>
+                            </li>  --}}
                         </ul>
                     </div>
                     <input type="submit">
@@ -448,42 +479,43 @@
         </div>
     </div>
 </div>
+@endsection
 
 <script>
     function openModal() {
-      document.getElementById("myModal").style.display = "block";
+        document.getElementById("myModal").style.display = "block";
     }
 
     function closeModal() {
-      document.getElementById("myModal").style.display = "none";
+        document.getElementById("myModal").style.display = "none";
     }
 
     var slideIndex = 1;
     showSlides(slideIndex);
 
     function plusSlides(n) {
-      showSlides(slideIndex += n);
+        showSlides(slideIndex += n);
     }
 
     function currentSlide(n) {
-      showSlides(slideIndex = n);
+        showSlides(slideIndex = n);
     }
 
     function showSlides(n) {
-      var i;
-      var slides = document.getElementsByClassName("mySlides");
-      var dots = document.getElementsByClassName("demo");
-      var captionText = document.getElementById("caption");
-      if (n > slides.length) {slideIndex = 1}
-      if (n < 1) {slideIndex = slides.length}
-      for (i = 0; i < slides.length; i++) {
-          slides[i].style.display = "none";
-      }
-      for (i = 0; i < dots.length; i++) {
-          dots[i].className = dots[i].className.replace(" active", "");
-      }
-      slides[slideIndex-1].style.display = "block";
-      dots[slideIndex-1].className += " active";
-      captionText.innerHTML = dots[slideIndex-1].alt;
+        var i;
+        var slides = document.getElementsByClassName("mySlides");
+        var dots = document.getElementsByClassName("demo");
+        var captionText = document.getElementById("caption");
+        if (n > slides.length) { slideIndex = 1 }
+        if (n < 1) { slideIndex = slides.length }
+        for (i = 0; i < slides.length; i++) {
+            slides[i].style.display = "none";
+        }
+        for (i = 0; i < dots.length; i++) {
+            dots[i].className = dots[i].className.replace(" active", "");
+        }
+        slides[slideIndex - 1].style.display = "block";
+        dots[slideIndex - 1].className += " active";
+        captionText.innerHTML = dots[slideIndex - 1].alt;
     }
-    </script>
+</script>

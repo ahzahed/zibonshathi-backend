@@ -291,8 +291,11 @@ class RegisteredUserController extends Controller
             return view('frontend.pages.stripe');
         } elseif ($payment == 'mastercard') {
             echo "I am from master card";
-        } else {
+        } elseif ($payment == 'visa') {
             echo "I am form visa card";
+        }
+        else{
+            return redirect()->back();
         }
     }
     public function stripeCharge(Request $request)

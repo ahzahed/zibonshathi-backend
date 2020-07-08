@@ -89,7 +89,7 @@
                             @csrf
 
                             <div class="form-group">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror"
+                                <input id="email" type="email" placeholder="Email Address" class="form-control @error('email') is-invalid @enderror"
                                     name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
@@ -99,7 +99,7 @@
                                 @enderror
                             </div>
                             <div class="form-group">
-                                <input id="password" type="password"
+                                <input id="password" type="password" placeholder="Password"
                                     class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="current-password">
 
@@ -128,7 +128,7 @@
                         </form>
                         <div class="text-center pt-3">
                             <a href="{{ url('/auth/redirect/google') }}" style="border-right: 1px solid black;" class="pr-2">Gmail</a>
-                            <a href="{{ url('/login/facebook') }}">Facebook</a>
+                            <a href="{{ url('/auth/redirect/facebook') }}">Facebook</a>
                         </div>
                         <p>New to Zibonshathi?</p>
                         <div class="reg">

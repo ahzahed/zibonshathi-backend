@@ -33,13 +33,6 @@ Route::get('/viewProfile', 'RegisteredUserController@viewProfile')->name('viewPr
 Route::get('/auth/redirect/{provider}', 'SocialController@redirect');
 Route::get('/callback/{provider}', 'SocialController@callback');
 
-// Route::get('/auth/redirect/facebook', 'SocialController@fredirect');
-// Route::get('/callback/facebook', 'SocialController@fcallback');
-
-Route::get('/login/facebook', 'Auth\LoginController@redirectToProvider');
-Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderCallback');
-
-
 
 //Multi Image
 Route::get('multiple-image', 'ImageController@index');

@@ -12,11 +12,20 @@
   </head>
 
   <body id="viewProfile">
+      <div class="loader_bg">
+          <div class="loader"></div>
+      </div>
 
     @yield('content')
 
 
     <script src="{{ asset('public/frontend/js/jquery-1.12.4.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script>
+        setTimeout(function(){
+            $('.loader_bg').fadeToggle();
+        }, 1500);
+    </script>
     <script src="{{ asset('public/frontend/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/frontend/js/custom.js') }}"></script>
   </body>

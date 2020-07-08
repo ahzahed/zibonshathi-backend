@@ -1,4 +1,5 @@
 @extends('frontend.app')
+@section('content')
 
 @include('frontend.menu')
 
@@ -41,5 +42,6 @@
     </div>
 </section>
 <!-- Partner Search Part End -->
+@endsection
 @include('frontend.footer')
 @include('frontend.copyright')

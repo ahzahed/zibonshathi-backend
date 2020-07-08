@@ -1,5 +1,5 @@
 @extends('frontend.app')
-
+@section('content')
 <style>
     * {
       box-sizing: border-box;
@@ -165,7 +165,11 @@
                     <div class="row">
                         <div class="col-lg-2 col-8 mx-auto col-sm-4 col-md-3">
                             <div class="pro-img">
-                                <img src="{{ asset($user->avatar) }}" alt="img" style="height: 120px;" class="w-100">
+                                @if ($user->avatar == NULL)
+                                <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 150px;" class="w-100">
+                                @else
+                                <img src="{{ asset($user->avatar) }}" alt="img" style="height: 150px;" class="w-100">
+                                @endif
                             </div>
                         </div>
                         <div class="col-lg-8 col-sm-8 col-md-7">
@@ -359,20 +363,36 @@
                                 <div class="gallery border p-4 mt-2">
                                     <div class="row">
                                         <div class="column">
+                                            @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 150px;" class="w-100">
+                                    @else
                                             <img src="{{ asset($user->gimage1) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(1)"
                                                 class="hover-shadow cursor">
+                                                @endif
                                         </div>
                                         <div class="column">
+                                            @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 150px;" class="w-100">
+                                    @else
                                             <img src="{{ asset($user->gimage2) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(2)"
                                                 class="hover-shadow cursor">
+                                                @endif
                                         </div>
                                         <div class="column">
+                                            @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 150px;" class="w-100">
+                                    @else
                                             <img src="{{ asset($user->gimage3) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(3)"
                                                 class="hover-shadow cursor">
+                                                @endif
                                         </div>
                                         <div class="column">
+                                            @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 150px;" class="w-100">
+                                    @else
                                             <img src="{{ asset($user->gimage4) }}" style="width:100%; height:150px" onclick="openModal();currentSlide(4)"
                                                 class="hover-shadow cursor">
+                                                @endif
                                         </div>
                                     </div>
 
@@ -532,7 +552,7 @@
             <div class="modal-body">
                 <h1>Payment Date</h1>
                 <p><span class="font-weight-bold"></span> {{ $user->payment_date }}</p>
-                <h1>Payment Eapired Date</h1>
+                <h1>Payment Expired Date</h1>
                 <p><span class="font-weight-bold"></span> {{ $user->payment_exp }}</p>
             </div>
             <div class="modal-footer">
@@ -598,7 +618,7 @@
                         @csrf
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Name</label>
+                                <label>Name <span style="color: red">*</span></label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror" name="name"
                                     value="{{ $user->name }}">
                                 @error('name')
@@ -611,7 +631,7 @@
                                 <label>Email</label>
                                 <input type="text" class="form-control" value="{{ $user->email }}" readonly>
                                 <input type="hidden" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" value="{{ $user->email }}">
+                                    name="email" value="{{ $user->email }}" readonly>
                                 @error('email')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -621,7 +641,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="gender">Gender</label>
+                                <label for="gender">Gender <span style="color: red">*</span></label>
                                 <select class="form-control @error('gender') is-invalid @enderror" name="gender">
                                     <option>{{ $user->gender }}</option>
                                     <option>Male</option>
@@ -634,7 +654,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Age</label>
+                                <label>Age <span style="color: red">*</span></label>
                                 <select class="form-control @error('age') is-invalid @enderror" name="age">
                                     <option value="{{ $user->age }}">{{ $user->age }}</option>
                                     <option value="18">18</option>
@@ -690,7 +710,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Height</label>
+                                <label>Height <span style="color: red">*</span></label>
                                 <select class="form-control @error('height') is-invalid @enderror" name="height">
                                     <option value="{{ $user->height }}">{{ $user->height }}</option>
                                     <option value="4ft">4ft</option>
@@ -737,7 +757,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Location</label>
+                                <label>Location <span style="color: red">*</span></label>
                                 <input type="text" class="form-control @error('location') is-invalid @enderror"
                                     name="location" value="{{ $user->location }}">
                                 @error('location')
@@ -749,7 +769,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="religion">Religion</label>
+                                <label for="religion">Religion <span style="color: red">*</span></label>
                                 <select class="form-control @error('religion') is-invalid @enderror" name="religion">
                                     <option value="{{ $user->religion }}">{{ $user->religion }}</option>
                                     <option value="Islam">Islam</option>
@@ -764,7 +784,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Mother Tongue</label>
+                                <label>Mother Tongue <span style="color: red">*</span></label>
                                 <input type="text" class="form-control @error('mothertongue') is-invalid @enderror"
                                     name="mothertongue" value="{{ $user->mothertongue }}">
                                 @error('mothertongue')
@@ -776,7 +796,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label for="occupation">occupation</label>
+                                <label for="occupation">occupation <span style="color: red">*</span></label>
                                 <select class="form-control @error('occupation') is-invalid @enderror"
                                     name="occupation">
                                     <option value="{{ $user->occupation }}">{{ $user->occupation }}</option>
@@ -898,7 +918,7 @@
                                 @enderror
                             </div>
                             <div class="form-group col-md-6">
-                                <label>Marital Status</label>
+                                <label>Marital Status <span style="color: red">*</span></label>
                                 <input type="text" class="form-control @error('maritalstatus') is-invalid @enderror"
                                     name="maritalstatus" value="{{ $user->maritalstatus }}">
                                 @error('maritalstatus')
@@ -910,7 +930,7 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-12">
-                                <label for="avatar" class="col-md-4 col-form-label">Image</label>
+                                <label for="avatar" class="col-md-4 col-form-label">Image <span style="color: red">*</span></label>
                                 <div class="col-md-12">
                                     <input type="file" class="form-control @error('avatar') is-invalid @enderror"
                                         value="{{ $user->avatar }}" name="avatar">
@@ -1567,7 +1587,11 @@
                                     </div>
                                 </div>
                                 <div class=" col-md-4 mb-4">
+                                    @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                    @else
                                     <img id="thumbImg" src="{{ asset($user->gimage1) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -1587,7 +1611,11 @@
                                     </div>
                                 </div>
                                 <div class=" col-md-4 mb-4">
+                                    @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                    @else
                                     <img id="thumbImg" src="{{ asset($user->gimage2) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -1607,7 +1635,11 @@
                                     </div>
                                 </div>
                                 <div class=" col-md-4 mb-4">
+                                    @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                    @else
                                     <img id="thumbImg" src="{{ asset($user->gimage3) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -1627,7 +1659,11 @@
                                     </div>
                                 </div>
                                 <div class=" col-md-4 mb-4">
+                                    @if ($user->gimage1 == NULL)
+                                        <img src="{{ asset('public/frontend/images/avatar-default.png') }}" alt="img" style="height: 120px;" class="w-100">
+                                    @else
                                     <img id="thumbImg" src="{{ asset($user->gimage4) }}" width="150px" class=" z-depth-1-half thumb-pic" alt="">
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -1639,7 +1675,7 @@
     </div>
 </div>
 <!--  Gallery Modal End -->
-
+@endsection
 
 <script>
     function openModal() {

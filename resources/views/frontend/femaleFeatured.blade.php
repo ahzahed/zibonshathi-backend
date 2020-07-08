@@ -20,10 +20,10 @@
                         <span>Height: {{ $femaleFeatured->height }}</span>
                         <span>Religion: {{ $femaleFeatured->religion }}</span>
                         @if (Auth::check())
-                        <a href="{{ url('detailsProfile/'.Crypt::encrypt($femaleFeatured->id)) }}" class="btn btn-primary">View
+                        <a href="{{ url('detailsProfile/'.Crypt::encrypt($femaleFeatured->id)) }}" class="btn btn-primary text-white">View
                             Profile</a>
                         @else
-                        <a data-toggle="modal" data-target="#login" class="btn btn-primary">View Profile</a>
+                        <a data-toggle="modal" data-target="#login" class="btn btn-primary text-white">View Profile</a>
                         @endif
                     </div>
                 </div>
