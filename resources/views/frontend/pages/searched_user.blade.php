@@ -1,5 +1,5 @@
 @extends('frontend.app')
-
+@section('content')
 @include('frontend.menu')
 
 <!-- Search Part Start -->
@@ -18,7 +18,7 @@
                         <span>Height: {{ $users->height }}</span>
                         <span>Occupation: {{ $users->religion }}</span>
                         @if(Auth::check())
-                        <a href="{{ url('detailsProfile/'.$users->id) }}" class="btn btn-primary">View Profile</a>
+                        <a href="{{ url('detailsProfile/'.Crypt::encrypt($users->id)) }}" class="btn btn-primary">View Profile</a>
                         @endif
                     </div>
                 </div>
@@ -29,3 +29,4 @@
     </div>
 </section>
 <!-- Search Part End -->
+@endsection

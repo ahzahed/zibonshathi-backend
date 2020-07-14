@@ -1,4 +1,6 @@
 @extends('frontend.app')
+@section('content')
+
 
 @include('frontend.menu')
 
@@ -79,4 +81,4 @@
 <!-- Membership Part End -->
 
 @include('frontend.copyright')
-
+@endsection

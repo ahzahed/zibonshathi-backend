@@ -1,6 +1,5 @@
 @extends('frontend.app')
 @section('content')
-
 @include('frontend.menu')
 <!-- Featured Male Profile Part Start -->
 <section id="view-all-male">

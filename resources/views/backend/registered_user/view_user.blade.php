@@ -195,19 +195,19 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Income</label>
+                            <label>Working</label>
                             <input type="text" class="form-control" value="{{ $registeredUser->workingwith }}" readonly>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Income</label>
+                            <label>Phone Number</label>
                             <input type="text" class="form-control" value="{{ $registeredUser->userphone }}" readonly>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label>Income</label>
+                            <label>Facebook Id</label>
                             <input type="text" class="form-control" value="{{ $registeredUser->userfacebook }}" readonly>
                         </div>
                     </div>

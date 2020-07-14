@@ -96,5 +96,6 @@
     </div>
 </section>
 
-
+@include('frontend.copyright')
 @endsection
+

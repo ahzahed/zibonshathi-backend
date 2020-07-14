@@ -1,5 +1,5 @@
 @extends('frontend.app')
-
+@section('content')
 @include('frontend.menu')
 
 <!-- Help Part Start -->
@@ -135,3 +135,4 @@
 
 @include('frontend.footer')
 @include('frontend.copyright')
+@endsection

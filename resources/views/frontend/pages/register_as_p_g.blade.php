@@ -1,6 +1,6 @@
 @extends('frontend.app')
-@include('frontend.menu')
 @section('content')
+@include('frontend.menu')
 <!-- Registration Part Start -->
 <section id="registration">
   <div class="container">

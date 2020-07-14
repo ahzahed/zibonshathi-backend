@@ -30,7 +30,7 @@
         background-color: #fefde5 !important;
     }
 </style>
-@include('frontend.menu')
+
 
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
     integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -61,12 +61,13 @@
         font-weight: bold
     }
 </style>
+@section('content')
 
-
+@include('frontend.menu')
 <div class="container pb-5">
     <!-- For demo purpose -->
     <div class="row mb-4">
-        <div class="col-lg-8 mx-auto text-center">
+        <div class="col-lg-8 mt-4 mx-auto text-center">
             <h2>Pay With Stripe</h2>
         </div>
     </div> <!-- End -->
@@ -89,10 +90,15 @@
                                 style="border: 2px solid gray; padding: 20px">
                                 @csrf
                                 <div class="form-group"> <label for="Select Price">
-                                        <select name="totalCharge">
-                                            <option value="99">For 7 day $99</option>
-                                            <option value="999">For 30 day $999</option>
-                                        </select>
+                                    {{--  <select name="totalCharge">
+                                        <option value="99">For 7 day $99</option>
+                                        <option value="999">For 30 day $999</option>
+                                    </select>  --}}
+                                    <select name="totalCharge">
+                                        @foreach ($package_price as $package_price)
+                                            <option value="{{ $package_price->price }}">For {{ $package_price->valid }} day ${{ $package_price->price }}</option>
+                                        @endforeach
+                                    </select>
                                 </div>
 
                                 <div class="form-row">
@@ -115,7 +121,7 @@
             </div>
         </div>
     </div>
-
+</div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
         crossorigin="anonymous"></script>
@@ -205,3 +211,5 @@
             form.submit();
         }
     </script>
+
+    @endsection

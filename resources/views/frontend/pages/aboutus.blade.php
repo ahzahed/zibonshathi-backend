@@ -1,5 +1,5 @@
 @extends('frontend.app')
-
+@section('content')
 @include('frontend.menu')
 <!-- About Us Part Start -->
 <section id="about">
@@ -67,3 +67,4 @@
 
 @include('frontend.footer')
 @include('frontend.copyright')
+@endsection

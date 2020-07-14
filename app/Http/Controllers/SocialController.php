@@ -21,12 +21,18 @@ class SocialController extends Controller
 
         $update = User::where('email', '=', $getInfo->email)->first();
         if ($update) {
-            return view('frontend.pages.signin_up_regis_prob', compact('update'));
+            $emailProviderId = $update->provider_id;
+            if($emailProviderId != $getInfo->id){
+                return view('frontend.pages.signin_up_regis_prob', compact('update'));
+            }
+            else{
+                $user = $this->createUser($getInfo, $provider);
+                auth()->login($user);
+                return redirect()->to('/');
+            }
         } else {
             $user = $this->createUser($getInfo, $provider);
-
             auth()->login($user);
-
             return redirect()->to('/');
         }
     }

@@ -17,6 +17,9 @@ class CreateVisitorsTable extends Migration
             $table->bigIncrements('id');
             $table->string('ip_address')->nullable();
             $table->string('visit_time')->nullable();
+            $table->string('getbrowser')->nullable();
+            $table->string('getdevice')->nullable();
+            $table->string('getos')->nullable();
             $table->timestamps();
         });
     }

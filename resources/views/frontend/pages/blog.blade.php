@@ -1,4 +1,5 @@
 @extends('frontend.app')
+@section('content')
 
 @include('frontend.menu')
 <!-- Featured Male Profile Part Start -->
@@ -24,4 +25,5 @@
     </div>
 </section>
 <!-- Featured Male Profile Part End -->
-
+@include('frontend.copyright')
+@endsection

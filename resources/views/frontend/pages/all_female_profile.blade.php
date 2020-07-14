@@ -1,5 +1,5 @@
 @extends('frontend.app')
-
+@section('content')
 @include('frontend.menu')
 <!-- Featured Female Profile Part Start -->
 <section id="view-all-male">
@@ -31,3 +31,4 @@
     </div>
 </section>
 <!-- Featured Female Profile Part End -->
+@endsection

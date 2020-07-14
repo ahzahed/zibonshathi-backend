@@ -77,6 +77,12 @@
     </li>
     @endif
     <li class="nav-item">
+        <a class="nav-link collapsed" href="{{url('/package')}}">
+            <i class="fas fa-money-bill-wave"></i>
+            <span>Package & Coupon</span>
+        </a>
+    </li>
+    <li class="nav-item">
         <a class="nav-link collapsed" href="{{url('/testimonial')}}">
             <i class="fas fa-file-alt"></i>
             <span>Testimonial</span>

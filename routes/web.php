@@ -145,7 +145,14 @@ Route::get('/userroleDelete/{id}', 'AddUserByAdminController@userroleDelete');
 //User Role
 Route::get('/userrole', 'AddUserByAdminController@userrole')->name('userrole');
 
+//Package and coupon
+Route::get('/package', 'packageController@index');
+Route::post('/packageUpdate/{id}', 'PackageController@packageUpdate')->name('packageUpdate');
 
+Route::post('/add_coupon', 'CouponController@addcoupon');
+Route::get('/couponActive/{id}', 'CouponController@couponActive');
+Route::get('/couponDeactive/{id}', 'CouponController@couponDeactive');
+Route::get('/couponDelete/{id}', 'CouponController@couponDelete');
 
 //Multi-Image Upload
 Route::post('save-image', 'ImageController@save');

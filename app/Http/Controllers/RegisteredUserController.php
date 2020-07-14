@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\InvoiceMail;
+use App\Package;
 use App\User;
 use Carbon\Carbon;
 use Dotenv\Validator;
@@ -288,7 +289,8 @@ class RegisteredUserController extends Controller
     {
         $payment = $request->payment;
         if ($payment == 'paypal') {
-            return view('frontend.pages.stripe');
+            $package_price = Package::all();
+            return view('frontend.pages.stripe',compact('package_price'));
         } elseif ($payment == 'mastercard') {
             echo "I am from master card";
         } elseif ($payment == 'visa') {
@@ -301,7 +303,9 @@ class RegisteredUserController extends Controller
     public function stripeCharge(Request $request)
     {
         $totalCharge = $request->totalCharge;
-        if ($totalCharge == 99 || $totalCharge == 999) {
+        $packagePrice = Package::where('price', $totalCharge)->first();
+        $packageValid = $packagePrice->valid;
+        if ($packagePrice) {
             // Set your secret key. Remember to switch to your live secret key in production!
             // See your keys here: https://dashboard.stripe.com/account/apikeys
             \Stripe\Stripe::setApiKey('sk_test_3YMEwbMESG4wUJMyuWj8rxVF00LgfPi9hS');
@@ -321,7 +325,7 @@ class RegisteredUserController extends Controller
             session()->flash('danger', 'Select any package');
             return Redirect()->route('viewProfile');
         }
-        if ($totalCharge == 99) {
+        if ($packageValid == 7) {
 
             $id = Auth::user()->id;
             $email = Auth::user()->email;
@@ -349,7 +353,7 @@ class RegisteredUserController extends Controller
             Mail::to($email)->send(new InvoiceMail($post));
             session()->flash('success', 'Your weekly payment successfully accepted');
             return Redirect()->route('viewProfile');
-        } else if ($totalCharge == 999) {
+        } else if ($packageValid == 30) {
             $id = Auth::user()->id;
             $email = Auth::user()->email;
             $name = Auth::user()->name;

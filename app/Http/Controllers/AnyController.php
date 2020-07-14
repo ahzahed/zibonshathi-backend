@@ -13,14 +13,17 @@ class AnyController extends Controller
 {
 
     function index(){
-        $UserIP = $_SERVER['REMOTE_ADDR'];
+        $UserIP = VisitorModel::get_ip();
         date_default_timezone_set("Asia/Dhaka");
         $timeDate = date("Y-m-d h:i:sa");
+        $getbrowser = VisitorModel::get_browsers();
+        $getdevice = VisitorModel::get_device();
+        $getos = VisitorModel::get_os();
 
         $ip_address = VisitorModel::where('ip_address', $UserIP)->first();
 
         if(!$ip_address){
-            VisitorModel::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate]);
+            VisitorModel::insert(['ip_address' => $UserIP, 'visit_time' => $timeDate, 'getbrowser' => $getbrowser, 'getdevice' => $getdevice, 'getos' => $getos]);
         }
         // else{
         //     VisitorModel::where('ip_address',$ip_address)->update(['visit_time'=>$timeDate]);

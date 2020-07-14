@@ -31,6 +31,9 @@
                       <th>ID No</th>
                       <th>IP Address</th>
                       <th>Date & Time</th>
+                      <th>Browser</th>
+                      <th>Device Type</th>
+                      <th>Device Name</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -39,6 +42,9 @@
                       <td>{{$visitorData->id}}</td>
                       <td>{{$visitorData->ip_address}}</td>
                       <td>{{$visitorData->visit_time}}</td>
+                      <td>{{$visitorData->getbrowser}}</td>
+                      <td>{{$visitorData->getdevice}}</td>
+                      <td>{{$visitorData->getos}}</td>
                     </tr>
                     @endforeach
                   </tbody>

@@ -1,5 +1,5 @@
 @extends('frontend.app')
-
+@section('content')
 @include('frontend.menu')
 
 <!-- Terms Of Use Part Start  -->
@@ -193,3 +193,4 @@
 <!-- Terms Of Use Part End -->
 @include('frontend.footer')
 @include('frontend.copyright')
+@endsection

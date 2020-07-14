@@ -1,4 +1,6 @@
 @extends('frontend.app')
+@section('content')
+
 
 @include('frontend.menu')
 <!-- Privacy Policy Part Start  -->
@@ -60,3 +62,4 @@
 <!-- Privacy Policy Part End -->
 @include('frontend.footer')
 @include('frontend.copyright')
+@endsection
