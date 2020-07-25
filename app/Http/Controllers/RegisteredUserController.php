@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Coupon;
 use App\Mail\InvoiceMail;
 use App\Package;
 use App\User;
@@ -304,7 +305,9 @@ class RegisteredUserController extends Controller
     {
         $totalCharge = $request->totalCharge;
         $packagePrice = Package::where('price', $totalCharge)->first();
-        $packageValid = $packagePrice->valid;
+
+        $coupon = $request->coupon;
+
         if ($packagePrice) {
             // Set your secret key. Remember to switch to your live secret key in production!
             // See your keys here: https://dashboard.stripe.com/account/apikeys
@@ -313,24 +316,48 @@ class RegisteredUserController extends Controller
             // Token is created using Checkout or Elements!
             // Get the payment token ID submitted by the form:
             $token = $_POST['stripeToken'];
-
-            $charge = \Stripe\Charge::create([
-                'amount' => $totalCharge * 100,
-                'currency' => 'usd',
-                'description' => 'Zibonshathi Payment',
-                'source' => $token,
-                'metadata' => ['order_id' => '6735'],
-            ]);
-        } else {
+            if($coupon){
+                $coupon = Coupon::where('coupon', $coupon)->first();
+                if(!$coupon){
+                    session()->flash('danger', 'Your coupon is not valid');
+                    return Redirect()->route('viewProfile');
+                }
+                $status = $coupon->coupon_status;
+                $discount = $coupon->discount;
+                if($status == 0){
+                    session()->flash('danger', 'Your coupon is not valid');
+                    return Redirect()->route('viewProfile');
+                }
+                else{
+                    $charge = \Stripe\Charge::create([
+                        'amount' => ($totalCharge * 100)-($discount*100),
+                        'currency' => 'usd',
+                        'description' => 'Zibonshathi Payment',
+                        'source' => $token,
+                        'metadata' => ['order_id' => '6735'],
+                    ]);
+                }
+            }
+            else {
+                $charge = \Stripe\Charge::create([
+                    'amount' => $totalCharge * 100,
+                    'currency' => 'usd',
+                    'description' => 'Zibonshathi Payment',
+                    'source' => $token,
+                    'metadata' => ['order_id' => '6735'],
+                ]);
+            }
+        }
+        else {
             session()->flash('danger', 'Select any package');
             return Redirect()->route('viewProfile');
         }
-        if ($packageValid == 7) {
-
+        $packageValid = $packagePrice->valid;
+        if($packageValid){
             $id = Auth::user()->id;
             $email = Auth::user()->email;
             $name = Auth::user()->name;
-            $package = "Weekly";
+            $package = $packageValid;
 
             $data = array();
             $data['payment_id'] = $charge->payment_method;
@@ -338,7 +365,7 @@ class RegisteredUserController extends Controller
             $data['blnc_transection'] = $charge->balance_transaction;
             $data['payment_date'] = Carbon::now();
             $date = Carbon::now();
-            $data['payment_exp'] = $date->addWeek();
+            $data['payment_exp'] = $date->addDay($packageValid);
             $update = User::where('id', '=', $id)->update($data);
 
             //Send Payment Invoice
@@ -348,39 +375,16 @@ class RegisteredUserController extends Controller
             $post->name = $name;
             $post->email = $email;
             $post->package = $package;
+            if($discount){
+                $post->discount = $discount;
+            }
             $post->paying_amount = $charge->amount;
 
             Mail::to($email)->send(new InvoiceMail($post));
-            session()->flash('success', 'Your weekly payment successfully accepted');
+            session()->flash('success', 'Your payment successfully accepted');
             return Redirect()->route('viewProfile');
-        } else if ($packageValid == 30) {
-            $id = Auth::user()->id;
-            $email = Auth::user()->email;
-            $name = Auth::user()->name;
-            $package = "Monthly";
-
-            $data = array();
-            $data['payment_id'] = $charge->payment_method;
-            $data['paying_amount'] = $charge->amount;
-            $data['blnc_transection'] = $charge->balance_transaction;
-            $data['payment_date'] = Carbon::now();
-            $date = Carbon::now();
-            $data['payment_exp'] = $date->addMonth();
-            $update = User::where('id', '=', $id)->update($data);
-
-            //Send Payment Invoice
-            $post = new Invoice();
-            $post->payment_date = Carbon::now();
-            $post->payment_id = $charge->payment_method;
-            $post->name = $name;
-            $post->email = $email;
-            $post->package = $package;
-            $post->paying_amount = $charge->amount;
-
-            Mail::to($email)->send(new InvoiceMail($post));
-            session()->flash('success', 'Your monthly payment successfully accepted');
-            return Redirect()->route('viewProfile');
-        } else {
+        }
+         else {
             session()->flash('danger', 'Select any package');
             return Redirect()->route('viewProfile');
         }

@@ -16,10 +16,11 @@
                 <form action="{{ URL::to('packageUpdate/'.$packages->id) }}" class="form-inline" method="POST">
                     @csrf
                     <div class="form-group mb-2">
-                      <input type="text" readonly class="form-control" value="{{ $packages->valid }} days">
+                      {{-- <input type="text" readonly class="form-control" value="{{ $packages->valid }} days"> --}}
+                      <span class="font-weight-bold">Days: </span><input type="number" name="valid" value="{{ $packages->valid }}" class="form-control">
                     </div>
                     <div class="form-group mx-sm-3 mb-2">
-                      <input type="number" name="price" value="{{ $packages->price }}" class="form-control">
+                      <span class="font-weight-bold">Price($): </span><input type="number" name="price" value="{{ $packages->price }}" class="form-control">
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Update</button>
                   </form>

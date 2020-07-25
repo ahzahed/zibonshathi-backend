@@ -90,15 +90,12 @@
                                 style="border: 2px solid gray; padding: 20px">
                                 @csrf
                                 <div class="form-group"> <label for="Select Price">
-                                    {{--  <select name="totalCharge">
-                                        <option value="99">For 7 day $99</option>
-                                        <option value="999">For 30 day $999</option>
-                                    </select>  --}}
-                                    <select name="totalCharge">
+                                    <select name="totalCharge" class="form-control">
                                         @foreach ($package_price as $package_price)
                                             <option value="{{ $package_price->price }}">For {{ $package_price->valid }} day ${{ $package_price->price }}</option>
                                         @endforeach
                                     </select>
+                                    <input type="text" class="form-control" name="coupon" placeholder="Coupon Code.....">
                                 </div>
 
                                 <div class="form-row">

@@ -27,6 +27,7 @@ class PackageController extends Controller
     public function packageUpdate(Request $request,$id){
         $post = Package::findorfail($id);
         $post->price = $request->price;
+        $post->valid = $request->valid;
         $post->save();
         session()->flash('success','Successsfully package updated');
         return Redirect()->back();

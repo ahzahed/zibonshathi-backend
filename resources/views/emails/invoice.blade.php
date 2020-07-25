@@ -24,17 +24,25 @@
         <td width="100" style="font-weight:bold; color:black">
             Unit Price
         </td>
+        @if ($item->discount)
+        <td width="100" style="font-weight:bold; color:black">
+            Discount
+        </td>
+        @endif
         <td width="100" style="font-weight:bold; color:black">
             Amount
         </td>
     </tr>
     <tr>
         <td>
-            <span style="font-weight: bold; color:black;">1.</span> {{ $item->package }}
+            <span style="font-weight: bold; color:black;">1.</span> {{ $item->package }} Days
         </td>
         <td>
             1
         </td>
+        @if ($item->discount)
+            {{ $item->discount }}
+        @endif
         <td>
             {{ $item->paying_amount/100 }}
         </td>
