@@ -146,7 +146,7 @@ Route::get('/userroleDelete/{id}', 'AddUserByAdminController@userroleDelete');
 Route::get('/userrole', 'AddUserByAdminController@userrole')->name('userrole');
 
 //Package and coupon
-Route::get('/package', 'packageController@index');
+Route::get('/package', 'PackageController@index');
 Route::post('/packageUpdate/{id}', 'PackageController@packageUpdate')->name('packageUpdate');
 
 Route::post('/add_coupon', 'CouponController@addcoupon');
