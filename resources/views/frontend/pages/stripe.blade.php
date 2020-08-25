@@ -90,12 +90,22 @@
                                 style="border: 2px solid gray; padding: 20px">
                                 @csrf
                                 <div class="form-group"> <label for="Select Price">
-                                    <select name="totalCharge" class="form-control">
-                                        @foreach ($package_price as $package_price)
-                                            <option value="{{ $package_price->price }}">For {{ $package_price->valid }} day ${{ $package_price->price }}</option>
-                                        @endforeach
-                                    </select>
-                                    <input type="text" class="form-control" name="coupon" placeholder="Coupon Code.....">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <label>Select Package <span class="text-danger">*</span></label>
+                                            <select name="totalCharge" class="form-control">
+                                                @foreach ($package_price as $package_price)
+                                                    <option value="{{ $package_price->price }}">For {{ $package_price->valid }} day ${{ $package_price->price }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label>Coupon <span class="text-muted">(Optional)</span></label>
+                                            <input type="text" class="form-control" name="coupon" placeholder="Coupon Code.....">
+                                        </div>
+                                    </div>
+                                    
+                                    
                                 </div>
 
                                 <div class="form-row">

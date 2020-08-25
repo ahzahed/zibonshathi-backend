@@ -38,13 +38,7 @@
 
                     <tr>
                       <td>{{$packageVaule->id}}</td>
-                      <td>
-                          @if ($packageVaule->valid == 7)
-                            Weekly
-                            @else
-                            Monthly
-                          @endif
-                      </td>
+                      <td>{{ $packageVaule->valid }} days</td>
                       <td>{{$packageVaule->price}}</td>
                     </tr>
                     @endforeach
